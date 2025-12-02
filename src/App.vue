@@ -1,15 +1,42 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import cvUrl from './assets/GULTIANO_RESUME.pdf'
+import emailjs from '@emailjs/browser'
+import cvUrl from './assets/GericResume.pdf'
 import profilePhoto from './assets/340780198_559536669614885_4900519508961975692_n.jpg'
 import solveItImage from './assets/2025-11-27(4).png'
 import togethaImage from './assets/2025-11-27(3).png'
+
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_9v72ket' // Replace with your Service ID
+const EMAILJS_TEMPLATE_ID = 'template_hg82t3s' // Replace with your Template ID
+const EMAILJS_PUBLIC_KEY = 'NnfB3xB6YSAM__5bH' // Replace with your Public Key
+
+// Initialize EmailJS
+if (typeof window !== 'undefined') {
+  emailjs.init(EMAILJS_PUBLIC_KEY)
+}
 
 const name = ref('Geric')
 const title = ref('Frontend Developer')
 const university = ref('University of the Immaculate Conception')
 const course = ref('BS Information Technology')
 const year = ref('4th Year')
+
+// Contact Form State
+const formData = ref({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+})
+const isSubmitting = ref(false)
+const submitMessage = ref('')
+
+const toast = ref({
+  visible: false,
+  message: '',
+  type: 'success'
+})
 
 // Navbar state
 const isMenuOpen = ref(false)
@@ -34,6 +61,44 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false
 }
+
+const showToast = (message, type = 'success', duration = 4000) => {
+  toast.value = {
+    visible: true,
+    message,
+    type
+  }
+
+  setTimeout(() => {
+    toast.value.visible = false
+  }, duration)
+}
+
+const showCvModal = ref(false)
+
+const openCvModal = () => {
+  showCvModal.value = true
+  // prevent background scroll while modal is open
+  if (typeof document !== 'undefined') document.body.style.overflow = 'hidden'
+}
+
+const closeCvModal = () => {
+  showCvModal.value = false
+  if (typeof document !== 'undefined') document.body.style.overflow = ''
+}
+
+const handleKeyDownForModal = (e) => {
+  if (e.key === 'Escape' && showCvModal.value) closeCvModal()
+}
+
+// listen for Escape to close modal
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDownForModal)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDownForModal)
+})
 
 const skills = ref([
   {
@@ -127,6 +192,45 @@ const scrollToSection = (sectionId) => {
     element.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+// Send Email Function
+const sendEmail = async () => {
+  if (!formData.value.name || !formData.value.email || !formData.value.subject || !formData.value.message) {
+    submitMessage.value = 'Please fill in all fields'
+    return
+  }
+
+  isSubmitting.value = true
+  submitMessage.value = ''
+
+  try {
+    const templateParams = {
+      from_name: formData.value.name,
+      from_email: formData.value.email,
+      subject: formData.value.subject,
+      message: formData.value.message,
+      to_email: 'orentgultiano11@gmail.com' // Your Gmail address
+    }
+
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+
+    showToast('Message sent successfully! I\'ll reply within 48 hours.', 'success', 4000)
+    
+    // Reset form
+    formData.value = { name: '', email: '', subject: '', message: '' }
+    
+    // Clear message after 5 seconds
+    setTimeout(() => {
+      submitMessage.value = ''
+    }, 5000)
+  } catch (error) {
+    console.error('Email send failed:', error)
+    showToast('Failed to send message. Please try again.', 'error', 4000)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
 </script>
 
 <template>
@@ -145,6 +249,7 @@ const scrollToSection = (sectionId) => {
             <li><a @click="scrollToSection('skills')">Skills</a></li>
             <li><a @click="scrollToSection('projects')">Projects</a></li>
             <li><a @click="scrollToSection('contact')">Contact</a></li>
+            <a :href="cvUrl" class="download-cv" download aria-label="Download CV"> <ion-icon name="download-outline"></ion-icon> Download CV </a>
           </ul>
 
           <!-- Mobile Menu Button -->
@@ -207,7 +312,9 @@ const scrollToSection = (sectionId) => {
 
           <div class="hero-buttons">
             <button class="btn btn-primary" @click="scrollToSection('projects')">View My Work</button>
-            <a :href="cvUrl" class="btn btn-secondary" download aria-label="Download CV"> <ion-icon name="download-outline"></ion-icon> Download CV </a>
+<button type="button" class="btn btn-secondary" @click="openCvModal" aria-label="View CV">
+              <ion-icon name="document-text-outline"></ion-icon> View CV
+            </button>
           </div>
         </div>
 
@@ -415,12 +522,15 @@ const scrollToSection = (sectionId) => {
                     <h3 class="contact-card-text">Fill out the Form</h3>
                     <h4 class="contact-card-subtext">I'll usually reply within 48 hours.</h4>
                   </div>
-                  <form class="contact-form" @submit.prevent>
-                    <input type="text" name="name" placeholder="Your name" class="contact-input" />
-                    <input type="email" name="email" placeholder="your.email@example.com" class="contact-input" />
-                    <input type="text" name="subject" placeholder="Subject" class="contact-input" />
-                    <textarea name="message" rows="5" placeholder="Write your message..." class="contact-textarea"></textarea>
-                    <button type="submit" class="contact-submit">Send Message</button>
+                  <form class="contact-form" @submit.prevent="sendEmail">
+                    <input type="text" v-model="formData.name" placeholder="Your name" class="contact-input" required />
+                    <input type="email" v-model="formData.email" placeholder="your.email@example.com" class="contact-input" required />
+                    <input type="text" v-model="formData.subject" placeholder="Subject" class="contact-input" required />
+                    <textarea v-model="formData.message" rows="5" placeholder="Write your message..." class="contact-textarea" required></textarea>
+                    <button type="submit" class="contact-submit" :disabled="isSubmitting">
+                      {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                    </button>
+                    <p v-if="submitMessage" class="submit-message">{{ submitMessage }}</p>
                   </form>
                 </div>
 
@@ -451,6 +561,53 @@ const scrollToSection = (sectionId) => {
         </div>
       </div>
     </section>
+    <Transition name="toast-slide">
+      <div v-if="toast.visible" class="toast" :class="`toast-${toast.type}`">
+        <div class="toast-content">
+          <ion-icon 
+            v-if="toast.type === 'success'" 
+            name="checkmark-circle" 
+            class="toast-icon"
+          ></ion-icon>
+          <ion-icon 
+            v-else-if="toast.type === 'error'" 
+            name="alert-circle" 
+            class="toast-icon"
+          ></ion-icon>
+          <ion-icon 
+            v-else 
+            name="information-circle" 
+            class="toast-icon"
+          ></ion-icon>
+          <span class="toast-message">{{ toast.message }}</span>
+        </div>
+        <button class="toast-close" @click="toast.visible = false">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+    </Transition>
+        <transition name="modal-fade">
+      <div v-if="showCvModal" class="cv-modal-backdrop" @click.self="closeCvModal" role="dialog" aria-modal="true" aria-label="View CV">
+        <div class="cv-modal">
+          <header class="cv-modal-header">
+            <h3>Curriculum Vitae — {{ name }}</h3>
+            <button class="cv-modal-close" @click="closeCvModal" aria-label="Close CV viewer">
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </header>
+
+          <div class="cv-modal-body">
+            <!-- use iframe so PDF is viewable in-browser -->
+            <iframe :src="cvUrl" frameborder="0" class="cv-iframe" title="CV viewer"></iframe>
+          </div>
+
+          <footer class="cv-modal-footer">
+            <a :href="cvUrl" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            <button class="btn btn-primary" @click="closeCvModal">Close</button>
+          </footer>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -993,6 +1150,7 @@ body {
   font-size: 1.1rem; 
   vertical-align: middle; 
 }
+
 
 /* Hero Profile Photo */
 .hero-visual {
@@ -2612,7 +2770,217 @@ body {
     padding: 5rem 1.5rem;
   }
 }
+.cv-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  padding: 1.5rem;
+}
 
+.cv-modal {
+  width: min(1100px, 96%);
+  height: min(820px, 90%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cv-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+}
+
+.cv-modal-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text-light);
+  font-weight: 700;
+}
+
+.cv-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.25rem;
+  padding: 0.35rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cv-modal-body {
+  flex: 1;
+  background: var(--bg-color);
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.cv-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+}
+
+.cv-modal-footer {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+}
+
+/* modal transition */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: all 0.25s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px) scale(0.995);
+}
+
+@media (max-width: 720px) {
+  .cv-modal {
+    height: calc(100% - 3rem);
+  }
+  .cv-modal-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  max-width: 400px;
+  padding: 1rem 1.5rem;
+  background: var(--gradient-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 100;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.toast-success {
+  border-left: 4px solid #10b981;
+}
+
+.toast-success .toast-icon {
+  color: #10b981;
+  font-size: 1.5rem;
+}
+
+.toast-error {
+  border-left: 4px solid #ef4444;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+  font-size: 1.5rem;
+}
+
+.toast-info {
+  border-left: 4px solid var(--primary-color);
+}
+
+.toast-info .toast-icon {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.toast-message {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  color: var(--text-color);
+}
+
+.toast-close ion-icon {
+  font-size: 1.2rem;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-slide-enter-active,
+.toast-slide-leave-active {
+  transition: var(--transition);
+}
+
+.toast-slide-enter-from {
+  transform: translateX(400px);
+  opacity: 0;
+}
+
+.toast-slide-leave-to {
+  transform: translateX(400px);
+  opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .toast {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+}
 /* Custom Selection */
 ::selection {
   background: rgba(249, 115, 22, 0.3);
