@@ -14,8 +14,10 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@ionic/vue": "^8.7.10",
+    "@ionic/vue-router": "^8.7.17",
     "ionicons": "^8.0.13",
-    "vue": "^3.5.22"
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
