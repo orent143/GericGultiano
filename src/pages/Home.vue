@@ -22,7 +22,10 @@
                         passion for creating seamless digital experiences. Currently
                         pursuing my BS Information Technology at the University of the
                         Immaculate Conception, I've been honing my skills in frontend
-                        development and UI/UX design. I believe in writing clean,
+                        development and UI/UX design.
+                    </p>
+                    <p>
+                        I believe in writing clean,
                         maintainable code and creating interfaces that are both beautiful
                         and accessible. When I'm not coding, you can find me exploring new
                         design trends on Dribbble, Pinterest, Behance or learning new
@@ -48,7 +51,7 @@
                         <li>VS Code</li>
                         <li>Git & GitHub</li>
                         <li>Claude AI</li>
-                        <li>Azure DevOps</li>
+                        <li>Azure Boards</li>
                     </ul>
                 </div>
                 <div class="help-with">

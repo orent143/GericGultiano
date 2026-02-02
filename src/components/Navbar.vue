@@ -3,7 +3,7 @@
     <div class="navbar-content">
       <ul class="nav-links">
         <router-link class="nav-link" to="/">Home</router-link>
-        <router-link class="nav-link" to="/skills">Skills</router-link>
+        <router-link class="nav-link" to="/skills">Skills & Certifications</router-link>
         <router-link class="nav-link" to="/projects">Projects</router-link>
         <router-link class="nav-link" to="/contact">Contact</router-link>
       </ul>
