@@ -13,12 +13,12 @@ import { useRouter } from 'vue-router';
 
 <style>
 .main-container {
+    background-color: rgb(255, 253, 253);
     display: flex;
     flex-direction: column;
-    font-family: inter, sans-serif;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
     padding-top: 50px;
-    padding-left: 200px;
-    padding-right: 200px;
+    width: 100%;
     max-height: 100%;
     overflow: hidden;
 }

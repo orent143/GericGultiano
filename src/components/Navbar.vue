@@ -20,8 +20,8 @@ import { ref } from "vue";
 <style>
 
 .navbar-container {
+  display: flex;
   background-color: #ffffff;
-  padding: 10px ;
   border-bottom: 1px solid #d6d6d654;
 }
 .navbar-content {

@@ -6,33 +6,39 @@
                 <label class="tool-label">
                     <h2>Current Tools & Technologies</h2>
                 </label>
-                    <ul class="tools-ul">
-                        <li v-for="tool in tools" :key="tool.name">
-                            <img :src="tool.icon" :alt="tool.name" class="tool-icon" />
-                            <span>{{ tool.name }}</span>
-                        </li>
-                    </ul>
+                <ul class="tools-ul">
+                    <li v-for="tool in tools" :key="tool.name">
+                        <img :src="tool.icon" :alt="tool.name" class="tool-icon" />
+                        <span>{{ tool.name }}</span>
+                    </li>
+                </ul>
             </div>
             <div class="learning-list">
                 <label class="learning-label">
                     <h2>Currently Learning</h2>
-
                 </label>
-                    <ul class="learning-ul">
-                        <li v-for="learningItem in learning" :key="learningItem.name">
-                            <img :src="learningItem.icon" :alt="learningItem.name" class="learning-icon" />
-                            <span>{{ learningItem.name }}</span>
-                        </li>
-                    </ul>
+
+                <ul class="learning-ul">
+                    <div class="learning-overlay">
+                        <ProgressBar mode="indeterminate" style="height: 6px" class="skill-progress"
+                            :showValue="false" />
+                    </div>
+                    <li v-for="learningItem in learning" :key="learningItem.name">
+                        <img :src="learningItem.icon" :alt="learningItem.name" class="learning-icon" />
+                        <span>{{ learningItem.name }}</span>
+                    </li>
+                </ul>
             </div>
         </div>
+        <h1>Experiences</h1>
         <h1>Education & Certifications</h1>
         <div class="education-section">
             <div class="education-list">
                 <h2>Education</h2>
                 <ul>
                     <li v-for="education in education" class="education-item">
-                        <h3><ion-icon name="school-outline" class="education-icon"></ion-icon>{{ education.degree }}
+                        <h3>
+                            <ion-icon name="school-outline" class="education-icon"></ion-icon>{{ education.degree }}
                         </h3>
 
                         <span class="education-sub-item">
@@ -60,37 +66,46 @@
 
 <script setup>
 import { ref } from "vue";
+import ProgressBar from "primevue/progressbar";
+
 import vsCodeIcon from "@/assets/vscode.png";
 import gitHubIcon from "@/assets/github.png";
 import claudeAIIcon from "@/assets/claude.png";
-import azureIcon from "@/assets/azure.png";
-
+import fastApiIcon from "@/assets/fastapi.webp";
+import mySQLIcon from "@/assets/mysql.png";
 import htmlIcon from "@/assets/html.png";
 import cssIcon from "@/assets/css.png";
 import jsIcon from "@/assets/js.png";
 import vueIcon from "@/assets/vue.png";
 import nodeIcon from "@/assets/node.png";
 import figmaIcon from "@/assets/figma.png";
+import azureIcon from "@/assets/azure.png";
+import cypressIcon from "@/assets/cypress.webp";
 
 const tools = ref([
-    { name: "VS Code", icon: vsCodeIcon, },
-    { name: "Git & GitHub", icon: gitHubIcon, },
-    { name: "Claude AI", icon: claudeAIIcon, },
-    { name: "Azure Boards", icon: azureIcon, },
-    { name: "HTML", icon: htmlIcon, },
-    { name: "CSS", icon: cssIcon, },
-    { name: "JavaScript", icon: jsIcon, },
-    { name: "Vue.js", icon: vueIcon, },
-    { name: "Node.js", icon: nodeIcon, },
-    { name: "Figma", icon: figmaIcon, },
-])
+    { name: "VS Code", icon: vsCodeIcon },
+    { name: "Git & GitHub", icon: gitHubIcon },
+    { name: "Claude AI", icon: claudeAIIcon },
+    { name: "Azure Boards", icon: azureIcon },
+    { name: "HTML", icon: htmlIcon },
+    { name: "CSS", icon: cssIcon },
+    { name: "JavaScript", icon: jsIcon },
+    { name: "Vue.js", icon: vueIcon },
+    { name: "FastAPI", icon: fastApiIcon },
+    { name: "MySQL", icon: mySQLIcon },
+    { name: "Cypress", icon: cypressIcon },
+    { name: "Node.js", icon: nodeIcon },
+    { name: "Figma", icon: figmaIcon },
+]);
 
 const learning = ref([
-    { name: "TypeScript", icon: jsIcon, },
-    { name: "React", icon: vueIcon, },
-    { name: "Next.js", icon: nodeIcon, },
-    { name: "Tailwind CSS", icon: cssIcon, },
-])
+    { name: "React.js", icon: jsIcon },
+    { name: "Electron Js", icon: vueIcon },
+    { name: "Bubble", icon: vueIcon },
+    { name: "Postgres", icon: nodeIcon },
+    { name: "Aws", icon: cssIcon },
+    { name: "Supabase", icon: vueIcon },
+]);
 
 const education = ref([
     {
@@ -129,12 +144,13 @@ const certifications = ref([
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 
 .skills-container h1 {
     font-size: 25px;
-    font-family: "inter", sans-serif;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
     font-weight: 550;
     color: #333333;
 }
@@ -167,25 +183,31 @@ const certifications = ref([
     font-size: 18px;
     font-weight: 600;
 }
-.tools-list ul {
+
+.tools-ul {
     display: grid;
     list-style: none;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
-    padding: 0;
+    padding: 25px;
 }
 
-.tools-list li {
+.tools-ul li {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: #7b7b7b91;
+    background-color: transparent;
     backdrop-filter: blur(50px);
     padding: 8px;
+    gap: 5px;
     border-radius: 8px;
     font-weight: 500;
-    color: #f4f4f4;
-    font-size: 14px;
-    box-shadow: 12px 12px 6px rgba(66, 66, 66, 0.1);
+    color: #333333;
+    max-width: 100px;
+    font-size: 13px;
+    box-shadow:
+        0px 1px 2px 0px rgba(164, 172, 185, 0.24),
+        0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
 
 .tool-icon {
@@ -198,38 +220,70 @@ const certifications = ref([
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-bottom: 25px;
 }
+
+.learning-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    backdrop-filter: blur(2px);
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-progress {
+    width: 50%;
+    height: 6px;
+    border-radius: 6px;
+    background-color: #e2e8f0 !important;
+}
+
+.skill-progress .p-progressbar-value {
+    background-color: #1f2937;
+}
+
 .learning-label {
     display: flex;
     width: 100%;
     justify-content: center;
     margin-bottom: 10px;
 }
+
 .learning-list h2 {
     font-family: "inter", sans-serif;
     font-size: 18px;
     font-weight: 600;
 }
 
-.learning-list ul {
+.learning-ul {
+    overflow: hidden;
+    position: relative;
     display: grid;
     list-style: none;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
-    padding: 0;
+    padding: 25px;
 }
 
-.learning-list li {
+.learning-ul li {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: #37373791;
+    background-color: trasparent;
     backdrop-filter: blur(50px);
     padding: 8px;
+    gap: 5px;
     border-radius: 8px;
     font-weight: 500;
-    color: #f4f4f4;
-    font-size: 14px;
-    box-shadow: 12px 12px 6px rgba(66, 66, 66, 0.1);
+    color: #333333;
+    max-width: 100px;
+    font-size: 13px;
+    box-shadow:
+        0px 1px 2px 0px rgba(164, 172, 185, 0.24),
+        0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
 
 .learning-icon {
@@ -240,7 +294,9 @@ const certifications = ref([
 
 .education-section {
     display: flex;
-    padding: 20px;
+    padding-bottom: 20px;
+    gap: 50px;
+    width: 100%;
 }
 
 .education-icon {
@@ -251,10 +307,13 @@ const certifications = ref([
 .education-list,
 .achievements-list {
     flex: 1;
-    margin: 0 20px;
-    background-color: #f9f9f9;
+    background-color: transparent;
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
+    box-shadow:
+        0px 1px 2px 0px rgba(164, 172, 185, 0.24),
+        0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
 
 .education-list h2,

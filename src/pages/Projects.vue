@@ -67,6 +67,8 @@ const getProjectUrl = (liveUrl) => {
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 .projects-container h1 {
     font-size: 28px;

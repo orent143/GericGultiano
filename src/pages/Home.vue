@@ -5,7 +5,7 @@
                 <div class="experience">
                     <h2>Experience</h2>
                     <p>
-                        As a QA Intern at <span class="highlight">Jairosoft Inc.</span>, I
+                        Currently a QA Intern at <span class="highlight">Jairosoft Inc.</span>, I
                         performed functional and exploratory testing, authored and managed
                         test cases in Azure Boards, documented reproducible defects, and
                         worked closely with co-interns to verify fixes. This role enhanced
@@ -34,34 +34,19 @@
                 </div>
             </div>
             <div class="second-section">
-                <div class="skills">
-                    <h2>Skills / Tech Stack</h2>
-                    <ul class="skill-cards">
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>Vue.js</li>
-                        <li>Node.js</li>
-                        <li>Figma</li>
-                    </ul>
+                <div class="epereience-skills">
+                    <h2>Personal Experiences</h2>
+                    <Timeline :value="experiences" class="custom-timeline">
+                        <template #content="slotProps">
+                            <div class="timeline-content">
+                                <h4>{{ slotProps.item.title }}</h4>
+                                <p>{{ slotProps.item.description }}</p>
+                            </div>
+                            <p class="exp-date">{{ slotProps.item.date }}</p>
+                        </template>
+                    </Timeline>
                 </div>
-                <div class="tools-tech">
-                    <h2>Tools & Technologies</h2>
-                    <ul class="skill-cards">
-                        <li>VS Code</li>
-                        <li>Git & GitHub</li>
-                        <li>Claude AI</li>
-                        <li>Azure Boards</li>
-                    </ul>
-                </div>
-                <div class="help-with">
-                    <h2>What I Can Help With?</h2>
-                    <ul class="help-cards">
-                        <li v-for="(service, index) in services" :key="index">
-                            {{ index + 1 }}. {{ service }}
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </div>
         <div class="project-container">
@@ -90,6 +75,47 @@
 import { ref } from "vue";
 import solveItImage from "@/assets/2025-11-27(4).png";
 import togethaImage from "@/assets/2025-11-27(3).png";
+import Timeline from 'primevue/timeline';
+
+const events = ref([
+    { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0' },
+    { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
+    { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
+    { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
+]);
+
+const experiences = ref([
+    {
+        title: "QA Intern",
+        description: "Jairosoft Inc.",
+        date: "2026",
+    },
+    {
+        title: "Frontend Developer",
+        description: "Togetha App - Capstone Project.",
+        date: "2025",
+    },
+    {
+        title: "First Experience as a Full-Stack Developer ",
+        description: "Cafe Beata - Sales and Inventory Management System.",
+        date: "2024",
+    },
+    {
+        title: "QA Automation tester ",
+        description: "School Canteen Management System.",
+        date: "2023",
+    },
+    {
+        title: "BS Information Technology",
+        description: "University of the Immaculate Conception.",
+        date: "2022",
+    },
+    {
+        title: "Hello World",
+        description: "Wrote my first line of code using cmd prompt.",
+        date: "2020",
+    },
+])
 
 const services = ref([
     "Building responsive landing pages and web applications",
@@ -129,6 +155,8 @@ const getProjectUrl = (liveUrl) => {
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 
 .detail-container {
@@ -142,7 +170,9 @@ const getProjectUrl = (liveUrl) => {
     margin-right: 100px;
     background-color: #f3f4f6;
     padding: 20px;
+    max-height: fit-content;
     border-radius: 20px;
+    box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, 0.24), 0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
 
 .experience {
@@ -150,12 +180,14 @@ const getProjectUrl = (liveUrl) => {
 }
 
 h2 {
-    font-family: inter, sans-serif;
-    color: #333;
+    font-size: 25px;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
+    font-weight: 550;
+    color: #333333;
 }
 
 p {
-    font-family: "inter", sans-serif;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
     color: #666666;
     font-size: 15px;
     line-height: 1.6;
@@ -168,38 +200,61 @@ p {
     background-color: #f3f4f6;
     width: 100%;
     padding: 20px;
+    max-height: fit-content;
     border-radius: 20px;
+    box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, 0.24), 0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
 
 .second-section h2 {
     font-size: medium;
 }
 
-.skill-cards {
-    list-style: none;
+.custom-timeline .p-timeline-event-opposite {
+    flex: none;
+    position: relative;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    color: #f5f5f5;
+}
+
+.p-timeline-event-content {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 0;
 }
-
-.skill-cards li {
-    background-color: #ffffff;
-    padding: 8px 8px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+.custom-timeline .p-timeline-event-connector {
+    background-color: #d1d5db; /* line color */
+    width: 2px;               /* thickness */
+}
+.custom-timeline .p-timeline-event-marker {
+    background-color: #1f2937; /* dot color */
+    border: 2px solid white;
+    width: 15px;
+    height: 15px;
+}
+.timeline-content h4 {
+    display: flex;
+    flex-direction: column;
     font-size: 13px;
-}
-
-.help-cards {
-    list-style: none;
-    padding: 0;
-    font-size: 15px;
+    font-weight: 400;
     color: #666666;
+    margin: 0;
 }
 
-.help-cards li {
-    margin-bottom: 6px;
+.timeline-content p {
+    font-size: 12px;
+    width: 90%;
+    color: #999999;
+    margin-top: 4px;
+}
+
+.exp-date {
+    display: flex-start;
+    font-size: 12px;
+    color: #999999;
+    margin-left: 10px;
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
 }
 
 .project-container {

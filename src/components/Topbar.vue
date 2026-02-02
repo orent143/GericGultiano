@@ -1,4 +1,5 @@
 <template>
+    <div class="topbar-container">
         <div class="topbar">
             <div class="topbar-right">
                 <img :src="profPic" alt="Profile Picture" class="image-container" />
@@ -44,6 +45,7 @@
             </div>
         </div>
         <Navbar></Navbar>
+        </div>
 </template>
 
 <script setup>
@@ -82,7 +84,10 @@ const university = ref("University of the Immaculate Conception");
 </script>
 
 <style>
-
+.topbar-container {
+    padding-left: 250px;
+    padding-right: 250px;
+}
 .topbar {
     display: flex;
     align-items: center;
@@ -97,16 +102,16 @@ const university = ref("University of the Immaculate Conception");
 }
 
 .image-container {
-    width: 400px;
+    width: 450px;
     height: 250px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 30px;
     border-color: #f3f4f6;
-    border-width: 8px;
+    border-width: 5px;
     border-style: solid;
     object-fit: cover;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, .24), 0px 0px 0px 1px rgba(18, 55, 105, .08);
 }
 
 .content {
