@@ -276,7 +276,6 @@ onMounted(() => {
     padding-top: 15px;
     border-top: 1px solid #e1e4e8;
 }
-
 .github-calendar text {
     color: #333333;;
     font-size: 11px;
@@ -287,6 +286,7 @@ onMounted(() => {
 .github-calendar a {
     color: #666666;
     text-decoration: none;
+    display: none !important;
 }
 .github-calendar h2 {
     display: none;
@@ -319,9 +319,4 @@ onMounted(() => {
     color: #666666;
 }
 
-.github-table {
-    min-height: 200px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
 </style>
