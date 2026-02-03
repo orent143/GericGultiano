@@ -1,40 +1,44 @@
 <template>
     <div class="projects-container">
-        <div class="recent-projects">
-            <h1>My Recent Projects</h1>
-            <ul class="top-project-list">
-                <li v-for="(projects, index) in topProjects" :key="index" class="project-card"
-                    :style="projectStyle(projects.image)">
-                    <div class="project-info">
-                        <a :href="getProjectUrl(projects.liveUrl)" target="_blank" rel="noopener noreferrer"
-                            class="project-link">
-                            {{ projects.title }}
-                        </a>
-                        <p class="project-description">{{ projects.description }}</p>
-                        <div class="tech-stack">
-                            <span v-for="(tech, techIndex) in projects.techStack" :key="techIndex" class="tech-item">
-                                {{ tech }}
-                            </span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
         <div class="github-section">
             <div class="github-title">
-                <h1>Explore more on my Github<span>List of my Github Repositories</span></h1>
+                <h1>GitHub Contributions<span>Contribution activity</span></h1>
                 <div class="options">
-                    <CascadeSelect v-model="selectedCity" :options="countries" optionLabel="cname"
-                        optionGroupLabel="name" :optionGroupChildren="['states', 'cities']" class="w-56"
-                        placeholder="Select a City" />
+                    <CascadeSelect v-model="options" :options="moreOptions" optionLabel="aname" optionGroupLabel="name"
+                        :optionGroupChildren="['accounts']" class="w-56" placeholder=" See Options" />
                 </div>
             </div>
             <div class="github-table">
+                <div ref="calendar" class="github-calendar"></div>
+            </div>
+        </div>
+        <div class="bottom-section">
+            <div class="recent-projects">
+                <h1>My Recent Projects <span class="description">List of my top projects</span></h1>
+                <ul class="top-project-list">
+                    <li v-for="(projects, index) in topProjects" :key="index" class="project-card"
+                        :style="projectStyle(projects.image)">
+                        <div class="project-info">
+                            <a :href="getProjectUrl(projects.liveUrl)" target="_blank" rel="noopener noreferrer"
+                                class="project-link">
+                                {{ projects.title }}
+                            </a>
+                            <p class="project-description">{{ projects.description }}</p>
+                            <div class="tech-stack">
+                                <span v-for="(tech, techIndex) in projects.techStack" :key="techIndex"
+                                    class="tech-item">
+                                    {{ tech }}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="github-contributions">
+                <h1>GitHub Repositories<span>List of my Github Repositories</span></h1>
             </div>
         </div>
     </div>
-    \
 </template>
 
 <script setup>
@@ -42,89 +46,27 @@ import { ref, onMounted } from "vue";
 import solveItImage from "@/assets/2025-11-27(4).png";
 import togethaImage from "@/assets/2025-11-27(3).png";
 import CascadeSelect from 'primevue/cascadeselect';
+import GitHubCalendar from "github-calendar"
+import "github-calendar/dist/github-calendar.css"
 
-const selectedCity = ref();
-const countries = ref([
+const calendar = (ref(null))
+const options = ref();
+const moreOptions = ref([
     {
-        name: 'Australia',
-        code: 'AU',
-        states: [
-            {
-                name: 'New South Wales',
-                cities: [
-                    { cname: 'Sydney', code: 'A-SY' },
-                    { cname: 'Newcastle', code: 'A-NE' },
-                    { cname: 'Wollongong', code: 'A-WO' }
-                ]
-            },
-            {
-                name: 'Queensland',
-                cities: [
-                    { cname: 'Brisbane', code: 'A-BR' },
-                    { cname: 'Townsville', code: 'A-TO' }
-                ]
-            }
+        name: 'Github',
+        accounts: [
+            { aname: 'Orent143' },
+            { aname: 'gericgultiano' }
         ]
     },
     {
-        name: 'Canada',
-        code: 'CA',
-        states: [
-            {
-                name: 'Quebec',
-                cities: [
-                    { cname: 'Montreal', code: 'C-MO' },
-                    { cname: 'Quebec City', code: 'C-QU' }
-                ]
-            },
-            {
-                name: 'Ontario',
-                cities: [
-                    { cname: 'Ottawa', code: 'C-OT' },
-                    { cname: 'Toronto', code: 'C-TO' }
-                ]
-            }
-        ]
-    },
-    {
-        name: 'United States',
-        code: 'US',
-        states: [
-            {
-                name: 'California',
-                cities: [
-                    { cname: 'Los Angeles', code: 'US-LA' },
-                    { cname: 'San Diego', code: 'US-SD' },
-                    { cname: 'San Francisco', code: 'US-SF' }
-                ]
-            },
-            {
-                name: 'Florida',
-                cities: [
-                    { cname: 'Jacksonville', code: 'US-JA' },
-                    { cname: 'Miami', code: 'US-MI' },
-                    { cname: 'Tampa', code: 'US-TA' },
-                    { cname: 'Orlando', code: 'US-OR' }
-                ]
-            },
-            {
-                name: 'Texas',
-                cities: [
-                    { cname: 'Austin', code: 'US-AU' },
-                    { cname: 'Dallas', code: 'US-DA' },
-                    { cname: 'Houston', code: 'US-HO' }
-                ]
-            }
+        name: 'LinkedIn',
+        accounts: [
+            { aname: 'geric-gultiano' },
+            { aname: 'gericdev' }
         ]
     }
 ]);
-
-
-const selectedValue = ref(null);
-
-onMounted(() => {
-    NodeService.getTreeNodes().then((data) => (nodes.value = data));
-});
 
 
 const topProjects = ref([
@@ -158,6 +100,19 @@ const projectStyle = (image) => ({
 const getProjectUrl = (liveUrl) => {
     return liveUrl;
 };
+
+onMounted(() => {
+    if (!calendar.value) {
+        console.error("Calendar element not found.");
+        return;
+    } else {
+        GitHubCalendar(calendar.value, "orent143", {
+            responsive: true,
+            tooltips: true,
+        })
+    }
+})
+
 </script>
 
 <style>
@@ -175,36 +130,52 @@ const getProjectUrl = (liveUrl) => {
     margin-bottom: 20px;
 }
 
+.bottom-section {
+    display: flex;
+    width: 100%;
+}
+
 .recent-projects {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 80%;
 }
 
 .recent-projects h1 {
+    display: flex;
+    flex-direction: column;
     font-size: 25px;
-    font-family: inter, sans-serif;
     font-weight: 550;
     color: #333333;
+    gap: 10px;
+}
+
+.recent-projects .description {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
 }
 
 .top-project-list {
     list-style: none;
     display: flex;
-    width: 100%;
-    justify-content: center;
-    gap: 70px;
+    max-height: fit-content;
+    max-width: fit-content;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0;
+    justify-content: flex-start;
 }
 
 .project-card {
-    width: 350px;
-    height: 450px;
+    display: flex;
+    align-items: flex-end;
+    width: 30%;
+    height: 20%;
     background-size: cover;
     background-position: center;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: flex-end;
     padding-top: 15px;
     color: #ffffff;
     position: relative;
@@ -214,7 +185,7 @@ const getProjectUrl = (liveUrl) => {
 .project-info {
     background-color: rgba(255, 255, 255, 0.068);
     backdrop-filter: blur(80px);
-    padding: 30px;
+    padding: 15px;
     width: 100%;
 }
 
@@ -222,11 +193,12 @@ const getProjectUrl = (liveUrl) => {
     color: #ffffff;
     text-decoration: none;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .project-description {
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 300;
     margin: 10px 0;
     color: #fff2f2;
 }
@@ -236,29 +208,120 @@ const getProjectUrl = (liveUrl) => {
     gap: 10px;
     flex-wrap: wrap;
     margin-top: 10px;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .tech-item {
     background-color: #ffffff33;
     padding: 5px 10px;
     border-radius: 15px;
-    font-weight: 250;
+    font-weight: 150;
 }
+
+.github-contributions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.github-contributions h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 550;
+    color: #333333;
+}
+
+.github-contributions span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.github-calendar {
+    height: 100%;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.github-calendar:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.github-calendar .calendar-graph-header {
+    display: none;
+}
+
+.github-calendar .js-calendar-graph {
+    margin: 0;
+}
+
+.github-calendar .ContribColor {
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.github-calendar .ContribColor:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.github-calendar .calendar-graph-footer {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e1e4e8;
+}
+
+.github-calendar text {
+    color: #333333;;
+    font-size: 11px;
+}
+.github-calendar span {
+    color: #666666;
+}
+.github-calendar a {
+    color: #666666;
+    text-decoration: none;
+}
+.github-calendar h2 {
+    display: none;
+}
+
 .github-section {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
 .github-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .github-title h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     font-size: 25px;
     font-weight: 550;
     color: #333333;
+}
+.github-title span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.github-table {
+    min-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 </style>

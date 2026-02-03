@@ -16,6 +16,7 @@
     "@ionic/vue": "^8.7.10",
     "@ionic/vue-router": "^8.7.17",
     "@primeuix/themes": "^2.0.3",
+    "github-calendar": "^2.3.4",
     "ionicons": "^8.0.13",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.4",

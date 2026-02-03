@@ -69,11 +69,10 @@
 
 <script setup>
 import { ref } from "vue";
-import ProgressBar from "primevue/progressbar";
 import fastApiIcon from "@/assets/fastapi.webp";
+import ProgressBar from "primevue/progressbar";
 import vsCodeIcon from "@/assets/vscode.png";
 import gitHubIcon from "@/assets/github.png";
-import claudeAIIcon from "@/assets/claude.png";
 import mySQLIcon from "@/assets/mysql.png";
 import htmlIcon from "@/assets/html.png";
 import cssIcon from "@/assets/css.png";
@@ -82,6 +81,7 @@ import vueIcon from "@/assets/vue.png";
 import nodeIcon from "@/assets/node.png";
 import figmaIcon from "@/assets/figma.png";
 import azureIcon from "@/assets/azure.png";
+import claudeAIIcon from "@/assets/claude.png";
 import cypressIcon from "@/assets/cypress.webp";
 
 const tools = ref([
@@ -354,7 +354,6 @@ const certifications = ref([
 .achievements-list h2 {
     display: flex;
     flex-direction: column;
-    font-family: "inter", sans-serif;
     font-size: 18px;
     gap: 5px;
     font-weight: 600;
