@@ -18,19 +18,21 @@ import { ref } from "vue";
 </script>
 
 <style>
-
 .navbar-container {
   display: flex;
   background-color: #ffffff;
   border-bottom: 1px solid #d6d6d654;
 }
+
 .navbar-content {
   display: flex;
   align-items: center;
 }
+
 .sample {
   padding: 10px;
 }
+
 .nav-links {
   list-style: none;
   text-decoration: none;
@@ -39,18 +41,17 @@ import { ref } from "vue";
   padding: 0;
   gap: 40px;
 }
+
 .nav-link {
   color: #333333;
-  font-family: "inter", sans-serif;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
 }
+
 .nav-link :hover {
   color: #000;
   opacity: 0.7;
   text-decoration: underline;
 }
 </style>
-
-

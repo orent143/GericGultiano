@@ -34,7 +34,7 @@
         <h1>Education & Certifications</h1>
         <div class="education-section">
             <div class="education-list">
-                <h2>Education</h2>
+                <h2>Education <span>List of my educational attainments</span></h2>
                 <ul>
                     <li v-for="education in education" class="education-item">
                         <h3>
@@ -49,10 +49,13 @@
                 </ul>
             </div>
             <div class="achievements-list">
-                <h2>Certifications</h2>
+                <div class="achievements-title">
+                    <h2>Certifications <span>List of my certificates</span></h2>
+                    <a href="/Certificates" class="view-more"><ion-icon name="chevron-forward-outline"></ion-icon>View more</a>
+                </div>
                 <ul>
                     <li v-for="certification in certifications" class="certification-item">
-                        <h3>{{ certification.title }}</h3>
+                        <h3><ion-icon name="trophy-outline"></ion-icon>{{ certification.title }}</h3>
                         <span class="certification-sub-item">
                             {{ certification.issuer }}
                             ({{ certification.date }})
@@ -67,11 +70,10 @@
 <script setup>
 import { ref } from "vue";
 import ProgressBar from "primevue/progressbar";
-
+import fastApiIcon from "@/assets/fastapi.webp";
 import vsCodeIcon from "@/assets/vscode.png";
 import gitHubIcon from "@/assets/github.png";
 import claudeAIIcon from "@/assets/claude.png";
-import fastApiIcon from "@/assets/fastapi.webp";
 import mySQLIcon from "@/assets/mysql.png";
 import htmlIcon from "@/assets/html.png";
 import cssIcon from "@/assets/css.png";
@@ -127,6 +129,26 @@ const education = ref([
 
 const certifications = ref([
     {
+        title: "Front-End Web Developer Nanodegree",
+        issuer: "Udacity",
+        date: "2023",
+    },
+    {
+        title: "JavaScript Algorithms and Data Structures",
+        issuer: "freeCodeCamp",
+        date: "2022",
+    },
+        {
+        title: "Front-End Web Developer Nanodegree",
+        issuer: "Udacity",
+        date: "2023",
+    },
+    {
+        title: "JavaScript Algorithms and Data Structures",
+        issuer: "freeCodeCamp",
+        date: "2022",
+    },
+        {
         title: "Front-End Web Developer Nanodegree",
         issuer: "Udacity",
         date: "2023",
@@ -315,34 +337,84 @@ const certifications = ref([
         0px 1px 2px 0px rgba(164, 172, 185, 0.24),
         0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
-
+.achievements-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.view-more {
+    font-size: 14px;
+    color: #1f2937;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .education-list h2,
 .achievements-list h2 {
+    display: flex;
+    flex-direction: column;
     font-family: "inter", sans-serif;
     font-size: 18px;
+    gap: 5px;
     font-weight: 600;
     color: #333333;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
-
-.education-list ul,
-.achievements-list ul {
+.achievements-list span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+}
+.education-list span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+}
+.education-list ul {
     list-style: none;
     padding: 0;
 }
 
-.education-item,
-.certification-item {
+.education-item {
+    display: grid;
     margin-bottom: 15px;
     font-size: 16px;
     color: #444444;
     border-left: 5px solid #e0e0e0;
     padding-left: 15px;
 }
-
+.certification-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: fit-content;
+    box-shadow:
+        0px 1px 2px 0px rgba(164, 172, 185, 0.24),
+        0px 0px 0px 1px rgba(18, 55, 105, 0.08);
+    border-radius: 8px;
+}
+.certification-item h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+    gap: 10px;
+}
+.hydrated {
+    display: inline-block;
+    margin-right: 5px;
+}
+.achievements-list ul {
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
 .education-sub-item,
 .certification-sub-item {
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 400;
     color: #666666;
 }
 </style>

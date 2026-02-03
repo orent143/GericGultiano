@@ -254,7 +254,7 @@ p {
     margin-left: 10px;
     position: absolute;
     bottom: 8px;
-    right: 16px;
+    right: 0px;
 }
 
 .project-container {

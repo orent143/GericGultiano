@@ -102,13 +102,13 @@ const university = ref("University of the Immaculate Conception");
 }
 
 .image-container {
-    width: 450px;
+    width: 500px;
     height: 250px;
-    border-radius: 50%;
+    border-radius: 10%;
     overflow: hidden;
     margin-right: 30px;
     border-color: #f3f4f6;
-    border-width: 5px;
+    border-width: 0px;
     border-style: solid;
     object-fit: cover;
     box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, .24), 0px 0px 0px 1px rgba(18, 55, 105, .08);
