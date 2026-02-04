@@ -2,11 +2,13 @@
     <div class="main-container">
     <Topbar />
     <router-view />
+    <AppFooter />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import AppFooter from '@/components/Footer.vue';
 import Topbar from '@/components/Topbar.vue';
 import { useRouter } from 'vue-router';
 </script>

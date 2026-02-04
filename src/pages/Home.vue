@@ -77,13 +77,6 @@ import solveItImage from "@/assets/2025-11-27(4).png";
 import togethaImage from "@/assets/2025-11-27(3).png";
 import Timeline from 'primevue/timeline';
 
-const events = ref([
-    { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0' },
-    { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
-    { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
-    { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
-]);
-
 const experiences = ref([
     {
         title: "QA Intern",
@@ -116,12 +109,6 @@ const experiences = ref([
         date: "2020",
     },
 ])
-
-const services = ref([
-    "Building responsive landing pages and web applications",
-    "Converting UI designs to code",
-    "Improving existing UI/UX",
-]);
 
 const projects = ref([
     {

@@ -35,7 +35,29 @@
                 </ul>
             </div>
             <div class="github-contributions">
-                <h1>GitHub Repositories<span>List of my Github Repositories</span></h1>
+                <h1>GitHub Repository<span>List of my Github Repositories</span></h1>
+                <!-- <a v-for="(repo, index) in repository" :key="index" :href="getProjectUrl(repo.liveUrl)" target="_blank"
+                        rel="noopener noreferrer" class="project-link">
+                        <div v-if="repo.title">
+                        {{ repo.title }} - {{ repo.technology }} - {{ repo.dateUpdated }}
+                        </div>
+                        <div v-else>
+                            <p>no repo available</p>
+                        </div>
+                    </a>
+                </div> -->
+                <Timeline :value="repository" class="github-timeline" align="left">
+                    <template #content="slotProps">
+                        <div class="timeline-content">
+                            <h4>{{ slotProps.item.title }}</h4>
+                            <p>{{ slotProps.item.technology }}</p>
+                        </div>
+    <p class="updated-date">
+      {{ slotProps.item.dateUpdated.within24h ? 'Updated:' : 'Updated at:' }}
+      {{ slotProps.item.dateUpdated.displayTime }}
+    </p>
+                    </template>
+                </Timeline>
             </div>
         </div>
     </div>
@@ -48,9 +70,60 @@ import togethaImage from "@/assets/2025-11-27(3).png";
 import CascadeSelect from 'primevue/cascadeselect';
 import GitHubCalendar from "github-calendar"
 import "github-calendar/dist/github-calendar.css"
+import Timeline from 'primevue/timeline';
 
+const repository = ref([]);
 const calendar = (ref(null))
 const options = ref();
+
+
+const formatUpdatedTime = (dateString) => {
+    const now = new Date();
+    const updated = new Date(dateString);
+    const diffMs = now - updated;
+
+    const diffMins = Math.floor(diffMs / 1000 / 60);
+    const diffHours = Math.floor(diffMins / 60);
+
+    if (diffHours < 24) {
+        // within 24 hours
+        if (diffHours > 0) {
+            return { displayTime: `${diffHours} hr${diffHours !== 1 ? 's' : ''} ago`, within24h: true };
+        } else {
+            return { displayTime: `${diffMins} min${diffMins !== 1 ? 's' : ''} ago`, within24h: true };
+        }
+    }
+
+    // beyond 24 hours → absolute date
+    return { 
+        displayTime: updated.toLocaleDateString('en-US', {
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric'
+        }),
+        within24h: false
+    };
+};
+
+
+const fetchRepositories = async () => {
+    try {
+        const response = await fetch('https://api.github.com/users/orent143/repos');
+        const data = await response.json();
+        repository.value = data.map (repo => ({
+            title: repo.name,
+            technology: repo.language || 'N/A',
+            dateUpdated: formatUpdatedTime(repo.updated_at),
+            liveUrl: repo.html_url
+        })
+    )} catch (err) {
+        console.error('Error fetching repositories:', err);
+    }
+};
+onMounted(() => {
+    fetchRepositories();
+});
+
 const moreOptions = ref([
     {
         name: 'Github',
@@ -119,7 +192,7 @@ onMounted(() => {
 .projects-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 50px;
     margin-top: 20px;
     padding-left: 250px;
     padding-right: 250px;
@@ -133,12 +206,13 @@ onMounted(() => {
 .bottom-section {
     display: flex;
     width: 100%;
+    gap: 20px;
 }
 
 .recent-projects {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 75%;
 }
 
 .recent-projects h1 {
@@ -158,11 +232,12 @@ onMounted(() => {
 
 .top-project-list {
     list-style: none;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     max-height: fit-content;
     max-width: fit-content;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 5px;
     padding: 0;
     justify-content: flex-start;
 }
@@ -170,7 +245,7 @@ onMounted(() => {
 .project-card {
     display: flex;
     align-items: flex-end;
-    width: 30%;
+    width: 100%;
     height: 20%;
     background-size: cover;
     background-position: center;
@@ -218,26 +293,7 @@ onMounted(() => {
     font-weight: 150;
 }
 
-.github-contributions {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
 
-.github-contributions h1 {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 20px;
-    font-weight: 550;
-    color: #333333;
-}
-
-.github-contributions span {
-    font-size: 14px;
-    font-weight: 400;
-    color: #666666;
-}
 
 .github-calendar {
     height: 100%;
@@ -276,18 +332,23 @@ onMounted(() => {
     padding-top: 15px;
     border-top: 1px solid #e1e4e8;
 }
+
 .github-calendar text {
-    color: #333333;;
+    color: #333333;
+    ;
     font-size: 11px;
 }
+
 .github-calendar span {
     color: #666666;
 }
+
 .github-calendar a {
     color: #666666;
     text-decoration: none;
     display: none !important;
 }
+
 .github-calendar h2 {
     display: none;
 }
@@ -313,10 +374,85 @@ onMounted(() => {
     font-weight: 550;
     color: #333333;
 }
+
 .github-title span {
     font-size: 14px;
     font-weight: 400;
     color: #666666;
 }
 
+.github-contributions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow:
+        0px 1px 2px 0px rgba(164, 172, 185, 0.24),
+        0px 0px 0px 1px rgba(18, 55, 105, 0.08);
+}
+.github-contributions .project-link {
+  color: #333333;
+}
+
+.github-contributions h1 {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: 550;
+    gap: 5px;
+    color: #333333;
+}
+
+.github-contributions span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+}
+.github-timeline .p-timeline-event-opposite {
+    flex: none;
+    position: relative;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    color: #f5f5f5;
+}
+
+.p-timeline-event-content {
+    display: flex;
+}
+
+.custom-timeline .p-timeline-event-marker {
+    background-color: #1f2937; /* dot color */
+    border: 2px solid white;
+    width: 15px;
+    height: 15px;
+}
+.timeline-content h4 {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 400;
+    color: #f00000;
+    margin: 0;
+}
+
+.timeline-content p {
+    font-size: 12px;
+    width: 90%;
+    color: #999999;
+    margin-top: 4px;
+}
+
+.exp-date {
+    display: flex-start;
+    font-size: 12px;
+    color: #999999;
+    margin-left: 10px;
+    position: absolute;
+    bottom: 8px;
+    right: 0px;
+}
 </style>
