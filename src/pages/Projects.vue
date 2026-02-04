@@ -419,24 +419,21 @@ onMounted(() => {
     padding: 0;
     color: #f5f5f5;
 }
-
+.github-timeline {
+    overflow-y: auto;
+    max-height: 400px;
+    scrollbar-color: #c1c1c1 transparent;
+    scroll-behavior:auto;
+}
 .p-timeline-event-content {
     display: flex;
 }
 
-.custom-timeline .p-timeline-event-marker {
+.github-timeline .p-timeline-event-marker {
     background-color: #1f2937; /* dot color */
     border: 2px solid white;
     width: 15px;
     height: 15px;
-}
-.timeline-content h4 {
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-    font-weight: 400;
-    color: #f00000;
-    margin: 0;
 }
 
 .timeline-content p {
