@@ -213,10 +213,12 @@ p {
     width: 2px;               /* thickness */
 }
 .custom-timeline .p-timeline-event-marker {
-    background-color: #1f2937; /* dot color */
-    border: 2px solid white;
-    width: 15px;
-    height: 15px;
+    background-color: #3b82f6;
+    border: 2px solid #e0e7ff;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 .timeline-content h4 {
     display: flex;

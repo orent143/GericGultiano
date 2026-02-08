@@ -6,7 +6,7 @@
                 <div class="content">
                     <h1>Geric Gultiano</h1>
                     <ul class="info">
-                        <li>Aspiring Frontend Developer</li>
+                        <li>QA Intern | Aspiring Frontend Developer</li>
                         <li>09956140268</li>
                     </ul>
                     <div class="details">

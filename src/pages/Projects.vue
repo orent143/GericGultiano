@@ -36,26 +36,18 @@
             </div>
             <div class="github-contributions">
                 <h1>GitHub Repository<span>List of my Github Repositories</span></h1>
-                <!-- <a v-for="(repo, index) in repository" :key="index" :href="getProjectUrl(repo.liveUrl)" target="_blank"
-                        rel="noopener noreferrer" class="project-link">
-                        <div v-if="repo.title">
-                        {{ repo.title }} - {{ repo.technology }} - {{ repo.dateUpdated }}
-                        </div>
-                        <div v-else>
-                            <p>no repo available</p>
-                        </div>
-                    </a>
-                </div> -->
                 <Timeline :value="repository" class="github-timeline" align="left">
                     <template #content="slotProps">
-                        <div class="timeline-content">
-                            <h4>{{ slotProps.item.title }}</h4>
-                            <p>{{ slotProps.item.technology }}</p>
+                        <div class="timeline-card">
+                            <div class="timeline-card-header">
+                                <h4>{{ slotProps.item.title }}</h4>
+                                <span class="timeline-lang" v-if="slotProps.item.technology !== 'N/A'">{{ slotProps.item.technology }}</span>
+                            </div>
+                            <p class="updated-date">
+                                {{ slotProps.item.dateUpdated.within24h ? 'Updated' : 'Updated at' }}
+                                {{ slotProps.item.dateUpdated.displayTime }}
+                            </p>
                         </div>
-    <p class="updated-date">
-      {{ slotProps.item.dateUpdated.within24h ? 'Updated:' : 'Updated at:' }}
-      {{ slotProps.item.dateUpdated.displayTime }}
-    </p>
                     </template>
                 </Timeline>
             </div>
@@ -95,7 +87,7 @@ const formatUpdatedTime = (dateString) => {
     }
 
     // beyond 24 hours → absolute date
-    return { 
+    return {
         displayTime: updated.toLocaleDateString('en-US', {
             month: 'short',
             day: '2-digit',
@@ -108,15 +100,16 @@ const formatUpdatedTime = (dateString) => {
 
 const fetchRepositories = async () => {
     try {
-        const response = await fetch('https://api.github.com/users/orent143/repos');
+        const response = await fetch('https://api.github.com/users/orent143/repos?sort=updated&direction=desc&per_page=30');
         const data = await response.json();
-        repository.value = data.map (repo => ({
+        repository.value = data.map(repo => ({
             title: repo.name,
             technology: repo.language || 'N/A',
             dateUpdated: formatUpdatedTime(repo.updated_at),
             liveUrl: repo.html_url
         })
-    )} catch (err) {
+        )
+    } catch (err) {
         console.error('Error fetching repositories:', err);
     }
 };
@@ -385,7 +378,8 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: fit-content;
+    width: 350px;
+    max-height: fit-content;
     background-color: #ffffff;
     padding: 10px;
     border-radius: 8px;
@@ -393,8 +387,9 @@ onMounted(() => {
         0px 1px 2px 0px rgba(164, 172, 185, 0.24),
         0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
+
 .github-contributions .project-link {
-  color: #333333;
+    color: #333333;
 }
 
 .github-contributions h1 {
@@ -411,45 +406,69 @@ onMounted(() => {
     font-weight: 400;
     color: #666666;
 }
+
 .github-timeline .p-timeline-event-opposite {
     flex: none;
     position: relative;
     width: auto;
     min-width: 0;
     padding: 0;
-    color: #f5f5f5;
+    color: transparent;
 }
+
 .github-timeline {
-    overflow-y: auto;
-    max-height: 400px;
-    scrollbar-color: #c1c1c1 transparent;
-    scroll-behavior:auto;
+    overflow: auto;
+    max-height: 500px;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+    scroll-behavior: smooth;
 }
-.p-timeline-event-content {
-    display: flex;
+
+.github-timeline .p-timeline-event-content {
+    padding-bottom: 4px;
 }
 
 .github-timeline .p-timeline-event-marker {
-    background-color: #1f2937; /* dot color */
-    border: 2px solid white;
-    width: 15px;
-    height: 15px;
+    background-color: #3b82f6;
+    border: 2px solid #e0e7ff;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.timeline-content p {
-    font-size: 12px;
-    width: 90%;
-    color: #999999;
-    margin-top: 4px;
+.github-timeline .p-timeline-event-connector {
+    background-color: #e5e7eb;
 }
 
-.exp-date {
-    display: flex-start;
-    font-size: 12px;
-    color: #999999;
-    margin-left: 10px;
-    position: absolute;
-    bottom: 8px;
-    right: 0px;
+
+.timeline-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.timeline-card-header h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.timeline-lang {
+    font-size: 10px;
+    font-weight: 500;
+    color: #6366f1;
+    background-color: #eef2ff;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.updated-date {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 6px;
+    margin-bottom: 0;
 }
 </style>
