@@ -2,7 +2,7 @@
 <template>
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; {{ currentYear }} My Website. All rights reserved.</p>
+      <p>&copy; {{ currentYear }} Geric Gultiano. All rights reserved.</p>
       <nav>
         <a href="/about">About</a> |
         <a href="/contact">Contact</a> |
