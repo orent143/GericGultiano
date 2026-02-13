@@ -7,12 +7,12 @@
                     <h1>Geric Gultiano</h1>
                     <ul class="info">
                         <li>QA Intern | Aspiring Frontend Developer</li>
-                        <li>09956140268</li>
+                        <li>+63 995-614-0268</li>
                     </ul>
                     <div class="details">
                         <div class="detail-item">
                             <h1>Education</h1>
-                            <h2>Bachelor of Science in Information Technology</h2>
+                            <h2>BS in Information Technology</h2>
                         </div>
                         <div class="detail-item">
                             <h1>Location</h1>
