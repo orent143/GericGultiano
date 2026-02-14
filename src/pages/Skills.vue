@@ -77,6 +77,12 @@ import mySQLIcon from "@/assets/mysql.png";
 import htmlIcon from "@/assets/html.png";
 import cssIcon from "@/assets/css.png";
 import jsIcon from "@/assets/js.png";
+import supabaseIcon from "@/assets/supabase.webp";
+import awsIcon from "@/assets/aws.webp";
+import postgreIcon from "@/assets/postgres.png";
+import bubbleIcon from "@/assets/bubble.png";
+import electronIcon from "@/assets/electron.webp";
+import reactIcon from "@/assets/react.webp";
 import vueIcon from "@/assets/vue.png";
 import nodeIcon from "@/assets/node.png";
 import figmaIcon from "@/assets/figma.png";
@@ -101,12 +107,12 @@ const tools = ref([
 ]);
 
 const learning = ref([
-    { name: "React.js", icon: jsIcon },
-    { name: "Electron Js", icon: vueIcon },
-    { name: "Bubble", icon: vueIcon },
-    { name: "Postgres", icon: nodeIcon },
-    { name: "Aws", icon: cssIcon },
-    { name: "Supabase", icon: vueIcon },
+    { name: "React.js", icon: reactIcon },
+    { name: "Electron Js", icon: electronIcon },
+    { name: "Bubble", icon: bubbleIcon },
+    { name: "Postgres", icon: postgreIcon },
+    { name: "Aws", icon: awsIcon },
+    { name: "Supabase", icon: supabaseIcon },
 ]);
 
 const education = ref([
@@ -201,7 +207,6 @@ const certifications = ref([
 }
 
 .tools-list h2 {
-    font-family: "inter", sans-serif;
     font-size: 18px;
     font-weight: 600;
 }
@@ -249,7 +254,7 @@ const certifications = ref([
     position: absolute;
     inset: 0;
     z-index: 20;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     background: rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: center;
@@ -275,7 +280,6 @@ const certifications = ref([
 }
 
 .learning-list h2 {
-    font-family: "inter", sans-serif;
     font-size: 18px;
     font-weight: 600;
 }

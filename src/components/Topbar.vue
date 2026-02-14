@@ -27,7 +27,7 @@
                         I build accessible, pixel-perfect digital experiences for the web
                         and mobile. Currently a
                         <span class="highlight">{{ year }} {{ course }}</span> student at
-                        the <span class="highlight">{{ university }}</span>, specializing in Vue.js, React Native, and
+                        the <span class="highlight">{{ university }}</span>, specializing in Vue.js, Node.js, and
                         UI/UX design.
                     </p>
                 </div>
