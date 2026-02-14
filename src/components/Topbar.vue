@@ -5,7 +5,7 @@
                 <img :src="profPic" alt="Profile Picture" class="image-container" />
                 <div class="content">
                     <h1>Geric Gultiano</h1>
-                    <ul class="info">
+                    <ul class="content-info">
                         <li>QA Intern | Aspiring Frontend Developer</li>
                         <li>+63 995-614-0268</li>
                     </ul>
@@ -36,10 +36,10 @@
                 <div class="additional-info">
                     <a v-for="(link, i) in socialLinks" :key="i" :href="link.url" class="social-link"
                         :aria-label="link.name" target="_blank" rel="noopener">
-                        <ion-icon :name="link.icon" class="social-icon"></ion-icon>
+                        <ion-icon :name="link.icon" class="topbar-icons"></ion-icon>
                     </a>
                     <a :href="cvUrl" class="download-cv" download aria-label="Download CV">
-                        <ion-icon name="download-outline" class="social-icon"></ion-icon>
+                        <ion-icon name="download-outline" class="topbar-icons"></ion-icon>
                     </a>
                 </div>
             </div>
@@ -85,38 +85,43 @@ const university = ref("University of the Immaculate Conception");
 
 <style>
 .topbar-container {
-    padding-left: 250px;
-    padding-right: 250px;
+    padding: 0 250px;
 }
 .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .topbar-right {
-    display: flex;
-    gap: 30px;
-    padding: 40px;
-    padding-left: 0px;
+  display: flex;
+  gap: 30px;
+  padding: 40px 0;
+  flex: 1;
 }
 
 .image-container {
-    width: 500px;
-    height: 250px;
-    border-radius: 10%;
-    overflow: hidden;
-    margin-right: 30px;
-    border-color: #f3f4f6;
-    border-width: 0px;
-    border-style: solid;
-    object-fit: cover;
-    box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, .24), 0px 0px 0px 1px rgba(18, 55, 105, .08);
+  width: 300px;
+  height: 220px;
+  border-radius: 10%;
+  object-fit: cover;
+  max-width: 100%;
+  box-shadow: 0px 1px 2px rgba(164, 172, 185, .24),
+              0px 0px 0px 1px rgba(18, 55, 105, .08);
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-info {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .content h1 {
@@ -127,24 +132,17 @@ const university = ref("University of the Immaculate Conception");
     font-family: "Zalando Sans SemiExpanded", sans-serif;
 }
 
-.info {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    gap: 15px;
-}
-
-.info li {
+.content-info li {
     font-size: 14px;
     color: #666;
 }
 
 .details {
-    display: flex;
-    gap: 40px;
-    margin-top: 10px;
+  display: flex;
+  gap: 40px;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
-
 .detail-item h1 {
     font-size: 14px;
     color: #888;
@@ -168,11 +166,9 @@ const university = ref("University of the Immaculate Conception");
 }
 
 .topbar-left {
-    display: flex;
-    gap: 30px;
-    padding: 40px;
-    height: max-content;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
 }
 
 .additional-info {
@@ -190,7 +186,7 @@ const university = ref("University of the Immaculate Conception");
     align-items: center;
 }
 
-.social-icon {
+.topbar-icons {
     font-size: 5px;
     width: 34px;
     height: 34px;
@@ -201,23 +197,27 @@ const university = ref("University of the Immaculate Conception");
     background: #f3f4f6;
     border-radius: 50px;
     padding: 6px;
-    transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
+    transition: 0.12s ease, background 0.12s ease, color 0.12s ease;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-.social-link:hover .social-icon,
-.social-link:focus .social-icon {
+.social-link:hover .topbar-icons {
+    transform: translateY(-3px);
+    background: #e0e7ff;
+    color: #3730a3;
+}
+.social-link:focus .topbar-icons {
     transform: translateY(-3px);
     background: #e0e7ff;
     color: #3730a3;
 }
 
-.download-cv .social-icon {
+.download-cv .topbar-icons {
     background: #fff7ed;
     color: #c2410c;
 }
 
-.download-cv:hover .social-icon {
+.download-cv:hover .topbar-icons {
     background: #ffedd5;
     color: #9a3412;
 }
@@ -225,5 +225,46 @@ const university = ref("University of the Immaculate Conception");
 .download-cv {
     font-size: 20px;
     color: #555;
+}
+@media (max-width: 1024px) {
+  .topbar-container {
+    padding: 0 40px;
+  }
+}
+@media (max-width: 768px) {
+  .topbar-container {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 768px) {
+  .topbar-right {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .image-container {
+    width: 200px;
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .content-info {
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .details {
+    justify-content: center;
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .topbar-left {
+    width: 100%;
+    justify-content: center;
+    padding-top: 0;
+  }
 }
 </style>

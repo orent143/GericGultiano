@@ -9,7 +9,16 @@
                 </div>
             </div>
             <div class="github-table">
+                <div class="github-table-title">
+                    <h2>GitHub Calendar</h2>
+                    <span>Overview of my coding activity</span>
+                </div>
                 <div ref="calendar" class="github-calendar"></div>
+                <div class="github-redirection">
+                        <a href="https://github.com/orent143" target="_blank" rel="noopener noreferrer" >
+                            <ion-icon name="logo-github" class="table-icon"></ion-icon><h3>Visit my GitHub for more.</h3>
+                        </a>
+                </div>
             </div>
         </div>
         <div class="bottom-section">
@@ -41,7 +50,8 @@
                         <div class="timeline-card">
                             <div class="timeline-card-header">
                                 <h4>{{ slotProps.item.title }}</h4>
-                                <span class="timeline-lang" v-if="slotProps.item.technology !== 'N/A'">{{ slotProps.item.technology }}</span>
+                                <span class="timeline-lang" v-if="slotProps.item.technology !== 'N/A'">{{
+                                    slotProps.item.technology }}</span>
                             </div>
                             <p class="updated-date">
                                 {{ slotProps.item.dateUpdated.within24h ? 'Updated' : 'Updated at' }}
@@ -285,39 +295,68 @@ onMounted(() => {
     border-radius: 15px;
     font-weight: 150;
 }
+.github-table {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 30px;
+    padding-top: 10px;
+    border-radius: 8px;
+    box-shadow:
+        0px 1px 2px 0px rgba(164, 172, 185, 0.24),
+        0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 
-
-
+}
+.github-table-title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.github-table-title h2 {
+    font-size: 20px;
+    margin-bottom: 0px;
+    font-weight: 550;
+    color: #333333;
+}
+.github-table-title span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+.github-redirection {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.github-redirection a {
+    color: #333333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+.github-redirection .table-icon {
+    color: #666666;
+    font-size: 20px;
+    transition: 0.3s ease;
+}
+.github-redirection h3 {
+    color: #666666;;
+    font-size: 15px;
+    font-weight: 400;
+    transition: 0.3s ease;
+}
+.github-redirection a:hover .table-icon {
+    color: #020617;
+}
+.github-redirection a:hover h3 {
+    color: #020617;
+    font-weight: bold;
+}
 .github-calendar {
     height: 100%;
     width: 100%;
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-}
-
-.github-calendar:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-}
-
-.github-calendar .calendar-graph-header {
-    display: none;
-}
-
-.github-calendar .js-calendar-graph {
-    margin: 0;
-}
-
-.github-calendar .ContribColor {
-    border-radius: 3px;
-    transition: all 0.2s ease;
-}
-
-.github-calendar .ContribColor:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    background: #ffffff00;
 }
 
 .github-calendar .calendar-graph-footer {
@@ -326,25 +365,20 @@ onMounted(() => {
     border-top: 1px solid #e1e4e8;
 }
 
-.github-calendar text {
-    color: #333333;
-    ;
-    font-size: 11px;
-}
-
 .github-calendar span {
     color: #666666;
 }
 
-.github-calendar a {
+.github-calendar .position-relative a {
     color: #666666;
     text-decoration: none;
     display: none !important;
 }
 
-.github-calendar h2 {
-    display: none;
+.github-calendar .table-column {
+    display: none !important;
 }
+
 
 .github-section {
     margin-top: 50px;
@@ -470,5 +504,46 @@ onMounted(() => {
     color: #9ca3af;
     margin-top: 6px;
     margin-bottom: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .projects-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .bottom-section {
+    flex-direction: column;
+  }
+
+  .recent-projects {
+    width: 100%;
+  }
+
+  .top-project-list {
+    grid-template-columns: 1fr;
+  }
+
+  .github-contributions {
+    width: 100%;
+  }
+
+  .github-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .github-calendar {
+    overflow-x: auto;
+  }
 }
 </style>

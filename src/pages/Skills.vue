@@ -416,4 +416,65 @@ const certifications = ref([
     font-weight: 400;
     color: #666666;
 }
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .skills-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .tools-section {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .tools-list {
+    border-right: none;
+    border-bottom: 3px solid #e0e0e0;
+    padding-right: 0;
+    padding-bottom: 30px;
+  }
+
+  .tools-ul,
+  .learning-ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .education-section {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .achievements-list ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .achievements-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tools-ul,
+  .learning-ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .achievements-list ul {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

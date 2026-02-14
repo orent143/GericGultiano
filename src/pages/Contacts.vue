@@ -37,16 +37,16 @@
                     <h3>Visit my profile</h3>
                     <div class="socials">
                         <a href="https://www.facebook.com/kurimaws214" target="_blank" rel="noopener noreferrer"
-                            class="social-link">
-                            <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+                            class="social">
+                            <ion-icon name="logo-facebook" class="social-icons"></ion-icon>
                         </a>
                         <a href="https://github.com/orent143" target="_blank" rel="noopener noreferrer"
-                            class="social-link">
-                            <ion-icon name="logo-github" class="social-icon"></ion-icon>
+                            class="social">
+                            <ion-icon name="logo-github" class="social-icons"></ion-icon>
                         </a>
                         <a href="https://github.com/orent143" target="_blank" rel="noopener noreferrer"
-                            class="social-link">
-                            <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+                            class="social">
+                            <ion-icon name="logo-linkedin" class="social-icons"></ion-icon>
                         </a>
                     </div>
                 </div>
@@ -190,13 +190,30 @@
     display: flex;
     gap: 20px;
 }
-
-.social-icon {
+.social {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+.social-link {
+    text-decoration: none;
+    display: inline-flex;
+}
+.social-icons {
     color: #ffffff;
     padding: 5px;
-    font-size: 10px;
+    width: 34px;
+    height: 34px;
     background-color: transparent;
+    border-radius: 50%;
     transition: 0.3s ease;
+}
+.social-icons:hover {
+    color: #020617;
+    background-color: #ffffff;
+    font-weight: bold;
+    border-radius: 50%;
+    transform: translateY(-3px);
 }
 
 .right {
@@ -279,5 +296,57 @@
     color: #020617;
     font-weight: bold;
     font-size: 16px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .contact-container {
+    padding: 10px 40px;
+  }
+
+  .second-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 10px 20px;
+  }
+
+  .first-content h1 {
+    font-size: 28px;
+  }
+
+  .first-content span {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .second-content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .left {
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+  }
+
+  .right {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  .right h2 {
+    font-size: 22px;
+  }
+
+  .input-container {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

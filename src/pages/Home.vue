@@ -51,7 +51,7 @@
         </div>
         <div class="project-container">
             <div class="label">
-                <h2>Top Projects</h2>
+                <h2>Live Projects</h2>
                 <a href="/projects" class="view-more-link">View all projects<ion-icon name="arrow-forward-outline"
                         class="view-icon"></ion-icon></a>
             </div>
@@ -326,5 +326,48 @@ p {
     font-size: 20px;
     font-family: "inter", sans-serif;
     font-weight: 400;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .home-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .first-section {
+    margin-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .detail-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .first-section {
+    margin-right: 0;
+  }
+
+  .project-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .project-card {
+    min-height: 180px;
+  }
+
+  .label {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
 </style>

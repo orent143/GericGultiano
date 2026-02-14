@@ -21,7 +21,9 @@ import { useRouter } from 'vue-router';
     font-family: "Archivo", Helvetica, Arial, sans-serif;
     padding-top: 50px;
     width: 100%;
-    max-height: 100%;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 </style>
