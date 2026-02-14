@@ -42,6 +42,7 @@ const closeMenu = () => {
   width: 100%;
   justify-content: space-between;
 }
+
 .sample {
   padding: 10px;
 }
@@ -54,6 +55,10 @@ const closeMenu = () => {
   padding: 0;
 }
 
+.router-link-exact-active {
+  color: #020617; /* Change text color */
+  border-bottom: 2px solid #020617; /* Add an underline effect */
+}
 .nav-link {
   color: #333333;
   font-weight: 600;
@@ -103,12 +108,13 @@ const closeMenu = () => {
     gap: 20px;
     padding: 20px 0;
     display: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     z-index: 999;
   }
 
   .nav-links.active {
     display: flex;
+    color: #ffffff;
   }
 }
 
