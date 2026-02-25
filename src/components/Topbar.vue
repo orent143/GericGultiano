@@ -6,7 +6,7 @@
                 <div class="content">
                     <h1>Geric Gultiano</h1>
                     <ul class="content-info">
-                        <li>QA Intern | Aspiring Frontend Developer</li>
+                        <li>QA | Dev Intern</li>
                         <li>+63 995-614-0268</li>
                     </ul>
                     <div class="details">
@@ -18,9 +18,9 @@
                             <h1>Location</h1>
                             <h2>Davao City, PH</h2>
                         </div>
-                        <div class="detail-item">
+                        <div class="detail-item-status">
                             <h1>Status</h1>
-                            <h2>Intern</h2>
+                            <h2>Internship</h2>
                         </div>
                     </div>
                     <p class="about">
@@ -152,7 +152,14 @@ const university = ref("University of the Immaculate Conception");
 .detail-item h2 {
     font-size: 15px;
 }
-
+.detail-item-status h1 {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+}
+.detail-item-status h2 {
+    font-size: 15px;
+}
 .about {
     margin-top: 15px;
     font-size: 16px;

@@ -100,6 +100,7 @@ const tools = ref([
     { name: "JavaScript", icon: jsIcon },
     { name: "Vue.js", icon: vueIcon },
     { name: "FastAPI", icon: fastApiIcon },
+    { name: "Bubble", icon: bubbleIcon },
     { name: "MySQL", icon: mySQLIcon },
     { name: "Cypress", icon: cypressIcon },
     { name: "Node.js", icon: nodeIcon },
@@ -109,8 +110,7 @@ const tools = ref([
 const learning = ref([
     { name: "React.js", icon: reactIcon },
     { name: "Electron Js", icon: electronIcon },
-    { name: "Bubble", icon: bubbleIcon },
-    { name: "Postgres", icon: postgreIcon },
+    { name: "PostgreSQL", icon: postgreIcon },
     { name: "Aws", icon: awsIcon },
     { name: "Supabase", icon: supabaseIcon },
 ]);

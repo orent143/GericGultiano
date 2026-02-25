@@ -5,12 +5,12 @@
                 <div class="experience">
                     <h2>Experience</h2>
                     <p>
-                        Currently a QA Intern at <span class="highlight">Jairosoft Inc.</span>, I
-                        performed functional and exploratory testing, authored and managed
-                        test cases in Azure Boards, documented reproducible defects, and
-                        worked closely with co-interns to verify fixes. This role enhanced
-                        my attention to detail and understanding of the software development
-                        lifecycle.
+                        Currently a QA & Dev Intern at <span class="highlight">Jairosoft Inc.</span>, I perform
+                        functional and exploratory testing, author and manage test cases in Azure Boards, document
+                        reproducible defects, and collaborate closely with co-interns to verify fixes. In addition to
+                        quality assurance responsibilities, I contribute to development tasks, further strengthening my
+                        understanding of the software development lifecycle. This role has enhanced my attention to
+                        detail, problem-solving skills, and cross-functional collaboration within an agile environment.
                     </p>
                 </div>
                 <div class="about-me">
@@ -75,6 +75,7 @@
 import { ref } from "vue";
 import solveItImage from "@/assets/2025-11-27(4).png";
 import togethaImage from "@/assets/2025-11-27(3).png";
+import taskwaveImage from "@/assets/taskwave.png"
 import Timeline from 'primevue/timeline';
 
 const experiences = ref([
@@ -122,9 +123,9 @@ const projects = ref([
         liveUrl: "https://togetha.uic.edu.ph/",
     },
     {
-        title: "Cafe Beata",
-        image: "https://placehold.co/600x400/1a1a2e/ef4444?text=Portfolio",
-        liveUrl: "#",
+        title: "TaskWave",
+        image: taskwaveImage,
+        liveUrl: "https://jairo-demo-task.bubbleapps.io/version-test/dashboard?",
     },
 ]);
 const getProjectStyle = (image) => ({
@@ -208,10 +209,14 @@ p {
 .p-timeline-event-content {
     display: flex;
 }
+
 .custom-timeline .p-timeline-event-connector {
-    background-color: #d1d5db; /* line color */
-    width: 2px;               /* thickness */
+    background-color: #d1d5db;
+    /* line color */
+    width: 2px;
+    /* thickness */
 }
+
 .custom-timeline .p-timeline-event-marker {
     background-color: #3b82f6;
     border: 2px solid #e0e7ff;
@@ -220,6 +225,7 @@ p {
     border-radius: 50%;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
+
 .timeline-content h4 {
     display: flex;
     flex-direction: column;
@@ -309,8 +315,8 @@ p {
 .project-content {
     width: 100%;
     padding: 16px;
-    background-color: rgba(255, 255, 255, 0.068);
-    backdrop-filter: blur(5px);
+    background-color: rgba(4, 4, 4, 0.248);
+    backdrop-filter: blur(20px);
 }
 
 .project-link {
@@ -321,53 +327,53 @@ p {
     color: inherit;
 }
 
-.project-content h2 {
-    color: #eeeeee;
-    font-size: 20px;
-    font-family: "inter", sans-serif;
+.project-content a {
+    color: #ffffff;
+    font-size: 18px;
+    font-family: "archivo", sans-serif;
     font-weight: 400;
 }
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
-  .home-container {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
+    .home-container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 
-  .first-section {
-    margin-right: 40px;
-  }
+    .first-section {
+        margin-right: 40px;
+    }
 }
 
 @media (max-width: 768px) {
-  .home-container {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+    .home-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
-  .detail-container {
-    flex-direction: column;
-    gap: 20px;
-  }
+    .detail-container {
+        flex-direction: column;
+        gap: 20px;
+    }
 
-  .first-section {
-    margin-right: 0;
-  }
+    .first-section {
+        margin-right: 0;
+    }
 
-  .project-cards {
-    flex-direction: column;
-    gap: 20px;
-  }
+    .project-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
 
-  .project-card {
-    min-height: 180px;
-  }
+    .project-card {
+        min-height: 180px;
+    }
 
-  .label {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+    .label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
 </style>

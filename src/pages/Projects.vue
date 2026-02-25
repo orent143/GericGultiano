@@ -69,6 +69,7 @@
 import { ref, onMounted } from "vue";
 import solveItImage from "@/assets/2025-11-27(4).png";
 import togethaImage from "@/assets/2025-11-27(3).png";
+import taskwaveImage from "@/assets/taskwave.png";
 import CascadeSelect from 'primevue/cascadeselect';
 import GitHubCalendar from "github-calendar"
 import "github-calendar/dist/github-calendar.css"
@@ -161,11 +162,11 @@ const topProjects = ref([
         techStack: ["VueJS", "EmailJS"],
     },
     {
-        title: "Cafe Beata",
-        description: "A sales and inventory management system for a cafe business.",
-        image: "https://placehold.co/600x400/1a1a2e/ef4444?text=Portfolio",
-        liveUrl: "#",
-        techStack: ["VueJS", "Python-FASTapi", "MySQL"]
+        title: "TaskWave",
+        description: "A simple task-management app, built on with Bubble.io",
+        image: taskwaveImage,
+        liveUrl: "https://jairo-demo-task.bubbleapps.io/version-test/dashboard?",
+        techStack: ["Bubble.io"]
     },
 ]);
 
@@ -261,7 +262,7 @@ onMounted(() => {
 }
 
 .project-info {
-    background-color: rgba(255, 255, 255, 0.068);
+    background-color: rgba(0, 0, 0, 0.358);
     backdrop-filter: blur(80px);
     padding: 15px;
     width: 100%;
