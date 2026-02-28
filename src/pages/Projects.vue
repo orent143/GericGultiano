@@ -23,18 +23,21 @@
         </div>
         <div class="bottom-section">
             <div class="recent-projects">
-                <h1>My Recent Projects <span class="description">List of my top projects</span></h1>
+                <div class="projects-header">
+                    <h1>My Recent Projects <span class="description">List of my top projects</span></h1>
+                    <a href="/all-projects" class="view-all-btn">View all <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                </div>
                 <ul class="top-project-list">
-                    <li v-for="(projects, index) in topProjects" :key="index" class="project-card"
-                        :style="projectStyle(projects.image)">
+                    <li v-for="(project, index) in topProjects" :key="index" class="project-card"
+                        :style="projectStyle(project.image_url)">
                         <div class="project-info">
-                            <a :href="getProjectUrl(projects.liveUrl)" target="_blank" rel="noopener noreferrer"
+                            <a :href="project.live_url" target="_blank" rel="noopener noreferrer"
                                 class="project-link">
-                                {{ projects.title }}
+                                {{ project.title }}
                             </a>
-                            <p class="project-description">{{ projects.description }}</p>
+                            <p class="project-description">{{ project.description }}</p>
                             <div class="tech-stack">
-                                <span v-for="(tech, techIndex) in projects.techStack" :key="techIndex"
+                                <span v-for="(tech, techIndex) in project.tech_stack" :key="techIndex"
                                     class="tech-item">
                                     {{ tech }}
                                 </span>
@@ -67,17 +70,21 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import solveItImage from "@/assets/2025-11-27(4).png";
-import togethaImage from "@/assets/2025-11-27(3).png";
-import taskwaveImage from "@/assets/taskwave.png";
+import { supabase } from '@/lib/supabase'
 import CascadeSelect from 'primevue/cascadeselect';
 import GitHubCalendar from "github-calendar"
 import "github-calendar/dist/github-calendar.css"
 import Timeline from 'primevue/timeline';
 
 const repository = ref([]);
-const calendar = (ref(null))
+const calendar = ref(null)
 const options = ref();
+const topProjects = ref([]);
+
+const fetchProjects = async () => {
+    const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(4)
+    topProjects.value = data || []
+}
 
 
 const formatUpdatedTime = (dateString) => {
@@ -126,6 +133,7 @@ const fetchRepositories = async () => {
 };
 onMounted(() => {
     fetchRepositories();
+    fetchProjects();
 });
 
 const moreOptions = ref([
@@ -146,37 +154,11 @@ const moreOptions = ref([
 ]);
 
 
-const topProjects = ref([
-    {
-        title: "Solve IT Tech Solutions",
-        description: "A responsive landing page for a tech solutions company offering IT services.",
-        image: solveItImage,
-        liveUrl: "https://solveittechsolutions.vercel.app/",
-        techStack: ["HTML", "CSS", "JavaScript", "EmailJS"],
-    },
-    {
-        title: "Togetha - Academic Platform",
-        description: "A responsive landing page for an academic platform offering educational resources.",
-        image: togethaImage,
-        liveUrl: "https://togetha.uic.edu.ph/",
-        techStack: ["VueJS", "EmailJS"],
-    },
-    {
-        title: "TaskWave",
-        description: "A simple task-management app, built on with Bubble.io",
-        image: taskwaveImage,
-        liveUrl: "https://jairo-demo-task.bubbleapps.io/version-test/dashboard?",
-        techStack: ["Bubble.io"]
-    },
-]);
+// Projects fetched from DB
 
-const projectStyle = (image) => ({
-    backgroundImage: `url('${image}')`,
+const projectStyle = (imageUrl) => ({
+    backgroundImage: `url('${imageUrl}')`,
 });
-
-const getProjectUrl = (liveUrl) => {
-    return liveUrl;
-};
 
 onMounted(() => {
     if (!calendar.value) {
@@ -226,6 +208,32 @@ onMounted(() => {
     font-weight: 550;
     color: #333333;
     gap: 10px;
+    margin-bottom: 0;
+}
+
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.view-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    transition: background-color 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background-color: #e5e7eb;
 }
 
 .recent-projects .description {
@@ -249,7 +257,7 @@ onMounted(() => {
 .project-card {
     display: flex;
     align-items: flex-end;
-    width: 100%;
+    width: 300px;
     height: 20%;
     background-size: cover;
     background-position: center;
@@ -415,7 +423,7 @@ onMounted(() => {
     width: 350px;
     max-height: fit-content;
     background-color: #ffffff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow:
         0px 1px 2px 0px rgba(164, 172, 185, 0.24),

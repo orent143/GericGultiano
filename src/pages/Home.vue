@@ -4,38 +4,17 @@
             <div class="first-section">
                 <div class="experience">
                     <h2>Experience</h2>
-                    <p>
-                        Currently a QA & Dev Intern at <span class="highlight">Jairosoft Inc.</span>, I perform
-                        functional and exploratory testing, author and manage test cases in Azure Boards, document
-                        reproducible defects, and collaborate closely with co-interns to verify fixes. In addition to
-                        quality assurance responsibilities, I contribute to development tasks, further strengthening my
-                        understanding of the software development lifecycle. This role has enhanced my attention to
-                        detail, problem-solving skills, and cross-functional collaboration within an agile environment.
-                    </p>
+                    <p>{{homeContent.experience_intro }}</p>
                 </div>
                 <div class="about-me">
                     <h2>About Me</h2>
-                    <p>
-                        I'm a passionate frontend developer who loves crafting beautiful,
-                        functional user interfaces. My journey in tech started with
-                        curiosity about how websites work, and it has grown into a deep
-                        passion for creating seamless digital experiences. Currently
-                        pursuing my BS Information Technology at the University of the
-                        Immaculate Conception, I've been honing my skills in frontend
-                        development and UI/UX design.
-                    </p>
-                    <p>
-                        I believe in writing clean,
-                        maintainable code and creating interfaces that are both beautiful
-                        and accessible. When I'm not coding, you can find me exploring new
-                        design trends on Dribbble, Pinterest, Behance or learning new
-                        technologies to expand my toolkit.
-                    </p>
+                    <p>{{homeContent.about_me}}</p>
                 </div>
             </div>
             <div class="second-section">
                 <div class="epereience-skills">
                     <h2>Personal Experiences</h2>
+                    <div class="timeline-wrapper">
                     <Timeline :value="experiences" class="custom-timeline">
                         <template #content="slotProps">
                             <div class="timeline-content">
@@ -45,6 +24,7 @@
                             <p class="exp-date">{{ slotProps.item.date }}</p>
                         </template>
                     </Timeline>
+                    </div>
                 </div>
 
             </div>
@@ -56,11 +36,11 @@
                         class="view-icon"></ion-icon></a>
             </div>
             <ul class="project-cards">
-                <li v-for="(project, index) in projects" :key="index" class="project-card"
+                <li v-for="(project, index) in liveProjects" :key="index" class="project-card"
                     :style="getProjectStyle(project.image)">
                     <div class="project-content">
                         <h2>
-                            <a :href="getProjectUrl(project.liveUrl)" target="_blank" rel="noopener noreferrer"
+                            <a :href="getProjectUrl(project.live_url)" target="_blank" rel="noopener noreferrer"
                                 class="project-link">
                                 {{ project.title }}</a>
                         </h2>
@@ -72,62 +52,37 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import solveItImage from "@/assets/2025-11-27(4).png";
-import togethaImage from "@/assets/2025-11-27(3).png";
-import taskwaveImage from "@/assets/taskwave.png"
+import { ref, onMounted } from "vue";
 import Timeline from 'primevue/timeline';
+import { supabase } from '@/lib/supabase'
 
-const experiences = ref([
-    {
-        title: "QA Intern",
-        description: "Jairosoft Inc.",
-        date: "2026",
-    },
-    {
-        title: "Frontend Developer",
-        description: "Togetha App - Capstone Project.",
-        date: "2025",
-    },
-    {
-        title: "First Experience as a Full-Stack Developer ",
-        description: "Cafe Beata - Sales and Inventory Management System.",
-        date: "2024",
-    },
-    {
-        title: "QA Automation tester ",
-        description: "School Canteen Management System.",
-        date: "2023",
-    },
-    {
-        title: "BS Information Technology",
-        description: "University of the Immaculate Conception.",
-        date: "2022",
-    },
-    {
-        title: "Hello World",
-        description: "Wrote my first line of code using cmd prompt.",
-        date: "2020",
-    },
-])
+const loading = ref(false)
+const experiences = ref([])
+const homeContent = ref({ about_me: '', experience_intro: '' })
+const liveProjects = ref([])
+const loadingProjects = ref(false)
 
-const projects = ref([
-    {
-        title: "Solve IT Tech Solutions",
-        image: solveItImage,
-        liveUrl: "https://solveittechsolutions.vercel.app/",
-    },
-    {
-        title: "Togetha - Academic Platform",
-        image: togethaImage,
-        liveUrl: "https://togetha.uic.edu.ph/",
-    },
-    {
-        title: "TaskWave",
-        image: taskwaveImage,
-        liveUrl: "https://jairo-demo-task.bubbleapps.io/version-test/dashboard?",
-    },
-]);
+const fetchExperiences = async () => {
+  loading.value = true
+  const { data } = await supabase.from('experiences').select('*').order('created_at', { ascending: false })
+  experiences.value = data || []
+  loading.value = false
+}
+
+
+const fetchHomeContent = async () => {
+  const { data } = await supabase.from('home_content').select('*').limit(1).single()
+  if (data) homeContent.value = data
+}
+
+const fetchLiveProjects = async () => {
+  loadingProjects.value = true
+  const { data } = await supabase.from('live_projects').select('*').order('created_at', { ascending: false })
+  liveProjects.value = data || []
+  loadingProjects.value = false
+}
+
+
 const getProjectStyle = (image) => ({
     backgroundImage: `url('${image}')`,
 });
@@ -135,6 +90,12 @@ const getProjectStyle = (image) => ({
 const getProjectUrl = (liveUrl) => {
     return liveUrl;
 };
+
+onMounted(() => {
+    fetchHomeContent(),
+    fetchExperiences(),
+    fetchLiveProjects()
+})
 </script>
 
 <style>
@@ -149,16 +110,18 @@ const getProjectUrl = (liveUrl) => {
 
 .detail-container {
     display: flex;
+    height: 550px;
 }
 
 .first-section {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-right: 100px;
+    margin-right: 5%;
+    width: 100%;
     background-color: #f3f4f6;
     padding: 20px;
-    max-height: fit-content;
+    max-height: 100%;
     border-radius: 20px;
     box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, 0.24), 0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
@@ -186,9 +149,9 @@ p {
     flex-direction: column;
     gap: 10px;
     background-color: #f3f4f6;
-    width: 100%;
+    width: 40%;
     padding: 20px;
-    max-height: fit-content;
+    height: 550px;
     border-radius: 20px;
     box-shadow: 0px 1px 2px 0px rgba(164, 172, 185, 0.24), 0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 }
@@ -196,20 +159,36 @@ p {
 .second-section h2 {
     font-size: medium;
 }
-
 .custom-timeline .p-timeline-event-opposite {
     flex: none;
     position: relative;
     width: auto;
     min-width: 0;
+    overflow: auto;
     padding: 0;
     color: #f5f5f5;
+}
+.timeline-wrapper {
+    max-height: 450px; /* adjust as needed */
+    overflow-y: auto;
+    padding-right: 10px; 
+}
+
+.timeline-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
 }
 
 .p-timeline-event-content {
     display: flex;
 }
-
+.p-timeline-event-opposite {
+  display: none !important;
+}
 .custom-timeline .p-timeline-event-connector {
     background-color: #d1d5db;
     /* line color */
