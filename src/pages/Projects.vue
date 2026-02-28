@@ -25,7 +25,7 @@
             <div class="recent-projects">
                 <div class="projects-header">
                     <h1>My Recent Projects <span class="description">List of my top projects</span></h1>
-                    <a href="/all-projects" class="view-all-btn">View all <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                    <router-link to="/all-projects" class="view-all-btn">View all <ion-icon name="arrow-forward-outline"></ion-icon></router-link>
                 </div>
                 <ul class="top-project-list">
                     <li v-for="(project, index) in topProjects" :key="index" class="project-card"
