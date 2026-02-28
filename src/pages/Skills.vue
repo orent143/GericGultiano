@@ -7,9 +7,9 @@
                     <h2>Current Tools & Technologies</h2>
                 </label>
                 <ul class="tools-ul">
-                    <li v-for="tool in tools" :key="tool.name">
-                        <img :src="tool.icon" :alt="tool.name" class="tool-icon" />
-                        <span>{{ tool.name }}</span>
+                    <li v-for="skill in skills" :key="skill.name">
+                        <img :src="skill.icon_url" :alt="skill.name" class="tool-icon" />
+                        <span>{{ skill.name }}</span>
                     </li>
                 </ul>
             </div>
@@ -24,7 +24,7 @@
                             :showValue="false" />
                     </div>
                     <li v-for="learningItem in learning" :key="learningItem.name">
-                        <img :src="learningItem.icon" :alt="learningItem.name" class="learning-icon" />
+                        <img :src="learningItem.icon_url" :alt="learningItem.name" class="learning-icon" />
                         <span>{{ learningItem.name }}</span>
                     </li>
                 </ul>
@@ -36,14 +36,14 @@
             <div class="education-list">
                 <h2>Education <span>List of my educational attainments</span></h2>
                 <ul>
-                    <li v-for="education in education" class="education-item">
+                    <li v-for="educationstats in education" class="education-item">
                         <h3>
-                            <ion-icon name="school-outline" class="education-icon"></ion-icon>{{ education.degree }}
+                            <ion-icon name="school-outline" class="education-icon"></ion-icon>{{ educationstats.degree }}
                         </h3>
 
                         <span class="education-sub-item">
-                            {{ education.school }}
-                            ({{ education.period }})
+                            {{ educationstats.school }}
+                            ({{ educationstats.period }})
                         </span>
                     </li>
                 </ul>
@@ -68,103 +68,50 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import fastApiIcon from "@/assets/fastapi.webp";
+import { ref, onMounted } from "vue";
+import { supabase } from '@/lib/supabase'
 import ProgressBar from "primevue/progressbar";
-import vsCodeIcon from "@/assets/vscode.png";
-import gitHubIcon from "@/assets/github.png";
-import mySQLIcon from "@/assets/mysql.png";
-import htmlIcon from "@/assets/html.png";
-import cssIcon from "@/assets/css.png";
-import jsIcon from "@/assets/js.png";
-import supabaseIcon from "@/assets/supabase.webp";
-import awsIcon from "@/assets/aws.webp";
-import postgreIcon from "@/assets/postgres.png";
-import bubbleIcon from "@/assets/bubble.png";
-import electronIcon from "@/assets/electron.webp";
-import reactIcon from "@/assets/react.webp";
-import vueIcon from "@/assets/vue.png";
-import nodeIcon from "@/assets/node.png";
-import figmaIcon from "@/assets/figma.png";
-import azureIcon from "@/assets/azure.png";
-import claudeAIIcon from "@/assets/claude.png";
-import cypressIcon from "@/assets/cypress.webp";
 
-const tools = ref([
-    { name: "VS Code", icon: vsCodeIcon },
-    { name: "Git & GitHub", icon: gitHubIcon },
-    { name: "Claude AI", icon: claudeAIIcon },
-    { name: "Azure Boards", icon: azureIcon },
-    { name: "HTML", icon: htmlIcon },
-    { name: "CSS", icon: cssIcon },
-    { name: "JavaScript", icon: jsIcon },
-    { name: "Vue.js", icon: vueIcon },
-    { name: "FastAPI", icon: fastApiIcon },
-    { name: "Bubble", icon: bubbleIcon },
-    { name: "MySQL", icon: mySQLIcon },
-    { name: "Cypress", icon: cypressIcon },
-    { name: "Node.js", icon: nodeIcon },
-    { name: "Figma", icon: figmaIcon },
-]);
+const education = ref([])
+const loadingEdu = ref(false)
 
-const learning = ref([
-    { name: "React.js", icon: reactIcon },
-    { name: "Electron Js", icon: electronIcon },
-    { name: "PostgreSQL", icon: postgreIcon },
-    { name: "Aws", icon: awsIcon },
-    { name: "Supabase", icon: supabaseIcon },
-]);
+const skills = ref([])
+const learning = ref([])
+const loading = ref(false)
 
-const education = ref([
-    {
-        degree: "Bachelor of Science in Information Technology",
-        school: "University of the Immaculate Conception",
-        period: "2022 - Present",
-    },
-    {
-        degree: "Senior High School",
-        school: "AMA Computer College of Davao",
-        period: "2020 - 2022",
-    },
-    {
-        degree: "Junior High School",
-        school: "Jose Maria College Foundation, Inc.",
-        period: "2016-2020",
-    },
-]);
+const certifications = ref([])
+const loadingCert = ref(false)
 
-const certifications = ref([
-    {
-        title: "Front-End Web Developer Nanodegree",
-        issuer: "Udacity",
-        date: "2023",
-    },
-    {
-        title: "JavaScript Algorithms and Data Structures",
-        issuer: "freeCodeCamp",
-        date: "2022",
-    },
-        {
-        title: "Front-End Web Developer Nanodegree",
-        issuer: "Udacity",
-        date: "2023",
-    },
-    {
-        title: "JavaScript Algorithms and Data Structures",
-        issuer: "freeCodeCamp",
-        date: "2022",
-    },
-        {
-        title: "Front-End Web Developer Nanodegree",
-        issuer: "Udacity",
-        date: "2023",
-    },
-    {
-        title: "JavaScript Algorithms and Data Structures",
-        issuer: "freeCodeCamp",
-        date: "2022",
-    },
-]);
+const fetchSkills = async () => {
+    loading.value = true
+    const { data } = await supabase.from('skills').select('*').order('created_at', { ascending: false })
+    if (data) {
+        skills.value = data.filter(item => item.status === 'learned')
+        learning.value = data.filter(item => item.status === 'learning')
+    }
+    loading.value = false
+}
+
+
+const fetchEducation = async () => {
+  loadingEdu.value = true
+  const { data } = await supabase.from('education').select('*').order('created_at', { ascending: false })
+  education.value = data || []
+  loadingEdu.value = false
+}
+
+const fetchCertifications = async () => {
+  loadingCert.value = true
+  const { data } = await supabase.from('certifications').select('*').order('created_at', { ascending: false })
+  certifications.value = data || []
+  loadingCert.value = false
+}
+
+onMounted(() => {
+    fetchSkills()
+    fetchEducation()
+    fetchCertifications()
+})
 </script>
 
 <style>

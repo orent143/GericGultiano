@@ -26,4 +26,7 @@ import { useRouter } from 'vue-router';
     overflow-y: auto;
     box-sizing: border-box;
 }
+ion-icon.hydrated {
+  margin-right: 0 !important;
+}
 </style>
