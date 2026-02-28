@@ -149,13 +149,14 @@ const getProjectUrl = (liveUrl) => {
 
 .detail-container {
     display: flex;
+    gap: 20px;
 }
 
 .first-section {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-right: 100px;
+    flex: 0 0 45%;
     background-color: #f3f4f6;
     padding: 20px;
     max-height: fit-content;
@@ -185,8 +186,8 @@ p {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex: 1;
     background-color: #f3f4f6;
-    width: 100%;
     padding: 20px;
     max-height: fit-content;
     border-radius: 20px;
@@ -358,7 +359,11 @@ p {
     }
 
     .first-section {
-        margin-right: 0;
+        width: 100%;
+    }
+
+    .second-section {
+        width: 100%;
     }
 
     .project-cards {
