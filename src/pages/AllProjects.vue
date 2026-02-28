@@ -2,7 +2,7 @@
     <div class="all-projects-container">
         <div class="page-header">
             <h1>All Projects <span>Complete list of my projects</span></h1>
-            <a href="/projects" class="back-btn"><ion-icon name="arrow-back-outline"></ion-icon> Back</a>
+            <router-link to="/projects" class="back-btn"><ion-icon name="arrow-back-outline"></ion-icon> Back</router-link>
         </div>
         <ul class="projects-grid">
             <li v-for="(project, index) in projects" :key="index" class="project-card"

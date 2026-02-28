@@ -257,7 +257,6 @@ onMounted(() => {
 .project-card {
     display: flex;
     align-items: flex-end;
-    width: 300px;
     height: 20%;
     background-size: cover;
     background-position: center;
