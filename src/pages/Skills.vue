@@ -3,9 +3,9 @@
         <h1>Tools & Skills</h1>
         <div class="tools-section">
             <div class="tools-list">
-                <label class="tool-label">
+                <div class="tool-label">
                     <h2>Current Tools & Technologies</h2>
-                </label>
+                </div>
                 <ul class="tools-ul">
                     <li v-for="skill in skills" :key="skill.name">
                         <img :src="skill.icon_url" :alt="skill.name" class="tool-icon" />
@@ -14,9 +14,9 @@
                 </ul>
             </div>
             <div class="learning-list">
-                <label class="learning-label">
+                <div class="learning-label">
                     <h2>Currently Learning</h2>
-                </label>
+                </div>
 
                 <ul class="learning-ul">
                     <div class="learning-overlay">
@@ -51,14 +51,14 @@
             <div class="achievements-list">
                 <div class="achievements-title">
                     <h2>Certifications <span>List of my certificates</span></h2>
-                    <a href="/Certificates" class="view-more"><ion-icon name="chevron-forward-outline"></ion-icon>View more</a>
+                    <router-link to="/all-certs" class="view-more"><ion-icon name="chevron-forward-outline"></ion-icon>View more</router-link>
                 </div>
                 <ul>
                     <li v-for="certification in certifications" class="certification-item">
                         <h3><ion-icon name="trophy-outline"></ion-icon>{{ certification.title }}</h3>
                         <span class="certification-sub-item">
                             {{ certification.issuer }}
-                            ({{ certification.date }})
+                            {{ certification.date }}
                         </span>
                     </li>
                 </ul>
@@ -114,7 +114,7 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
 .skills-container {
     display: flex;
     flex-direction: column;
@@ -245,7 +245,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: trasparent;
+    background-color: transparent;
     backdrop-filter: blur(50px);
     padding: 8px;
     gap: 5px;

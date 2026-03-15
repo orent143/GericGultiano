@@ -3,10 +3,6 @@
         <div class="github-section">
             <div class="github-title">
                 <h1>GitHub Contributions<span>Contribution activity</span></h1>
-                <div class="options">
-                    <CascadeSelect v-model="options" :options="moreOptions" optionLabel="aname" optionGroupLabel="name"
-                        :optionGroupChildren="['accounts']" class="w-56" placeholder=" See Options" />
-                </div>
             </div>
             <div class="github-table">
                 <div class="github-table-title">
@@ -135,23 +131,6 @@ onMounted(() => {
     fetchRepositories();
     fetchProjects();
 });
-
-const moreOptions = ref([
-    {
-        name: 'Github',
-        accounts: [
-            { aname: 'Orent143' },
-            { aname: 'gericgultiano' }
-        ]
-    },
-    {
-        name: 'LinkedIn',
-        accounts: [
-            { aname: 'geric-gultiano' },
-            { aname: 'gericdev' }
-        ]
-    }
-]);
 
 
 // Projects fetched from DB
