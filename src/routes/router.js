@@ -4,6 +4,7 @@ import Skills from "@/pages/Skills.vue";
 import Projects from "@/pages/Projects.vue";
 import AllProjects from "@/pages/AllProjects.vue"
 import Contact from "@/pages/Contacts.vue";
+import AllCerts from "@/pages/AllCerts.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -11,6 +12,7 @@ const routes = [
   { path: "/projects", component: Projects },
   { path: "/all-projects", component: AllProjects },
   { path: "/contact", component: Contact },
+  { path: "/all-certs", component: AllCerts },
 ];
 
 const router = createRouter({
