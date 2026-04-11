@@ -9,7 +9,7 @@
         <ul class="certificates-grid">
             <!-- <li v-for="(project, index) in projects" :key="index" class="project-card"> -->
                 <div class="certificate-info">
-                    <img src="cert" alt="" class="cert-image">
+                    <!-- <img src="cert" alt="" class="cert-image">-->
                     <a class="certificate-title">
                         title
                         <!-- {{ project.title }} -->
