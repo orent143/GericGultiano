@@ -1,5 +1,6 @@
 <template>
     <div class="main-container">
+    <Toast />
     <Topbar />
     <router-view />
     <AppFooter />
@@ -11,6 +12,7 @@ import { ref } from 'vue';
 import AppFooter from '@/components/Footer.vue';
 import Topbar from '@/components/Topbar.vue';
 import { useRouter } from 'vue-router';
+import Toast from 'primevue/toast';
 </script>
 
 <style>

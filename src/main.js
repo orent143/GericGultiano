@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice'
 import App from './App.vue'
 import router from '@/routes/router.js'
 import './assets/global.css'
@@ -41,4 +42,5 @@ const DarkBluePreset = definePreset(Lara, {
 createApp(App)
   .use(router)
   .use(PrimeVue, { theme: { preset: DarkBluePreset, options: { dark: false } } })
+  .use(ToastService)
   .mount('#app')

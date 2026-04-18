@@ -54,24 +54,86 @@
             <div class="right">
                 <h2>Fill out form:</h2>
                 <div class="input-container">
-                    <input type="Name" placeholder="Name" class="input-field" />
-                    <input type="Email" placeholder="Email" class="input-field" />
+                    <input v-model="name" type="text" placeholder="Name" class="input-field" />
+                    <input v-model="email" type="email" placeholder="Email" class="input-field" />
                 </div>
                 <div class="subject">
-                    <input type="text" placeholder="Subject" class="subject-field" />
+                    <input v-model="subject" type="text" placeholder="Subject" class="subject-field" />
                 </div>
                 <div class="message">
-                    <textarea placeholder="Your Message" class="message-field"></textarea>
+                    <textarea v-model="message" placeholder="Your Message" class="message-field"></textarea>
                 </div>
                 <div class="submit">
-                    <button class="submit-btn">Submit</button>
+                    <button class="submit-btn" @click="sendEmail">Submit</button>
                 </div>
             </div>
         </div>
+        <Toast />
     </div>
 </template>
 <script setup>
+import { ref } from "vue"
+import { useToast } from "primevue/usetoast"
+import Toast from "primevue/toast"
+import emailjs from "@emailjs/browser"
+
+const toast = useToast()
+
+const showSuccess = (detail = "Message Content") => {
+    toast.add({ severity: "success", summary: "Success Message", detail, life: 3000 })
+}
+
+const showWarn = (detail = "Message Content") => {
+    toast.add({ severity: "warn", summary: "Warn Message", detail, life: 3000 })
+}
+
+const showError = (detail = "Message Content") => {
+    toast.add({ severity: "error", summary: "Error Message", detail, life: 3000 })
+}
+
+// form state
+const name = ref("")
+const email = ref("")
+const subject = ref("")
+const message = ref("")
+
+const sendEmail = async () => {
+  // basic validation
+  if (!name.value || !email.value || !message.value) {
+        showWarn("Please fill in required fields.")
+    return
+  }
+
+  try {
+    const templateParams = {
+      from_name: name.value,
+      from_email: email.value,
+      subject: subject.value,
+      message: message.value,
+    }
+
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+
+        showSuccess("Message sent successfully.")
+
+    // clear form
+    name.value = ""
+    email.value = ""
+    subject.value = ""
+    message.value = ""
+  } catch (error) {
+    console.error(error)
+
+        showError("Failed to send message.")
+  }
+}
 </script>
+
 <style>
 .contact-container {
     display: flex;
@@ -349,4 +411,5 @@
     grid-template-columns: 1fr;
   }
 }
+
 </style>
