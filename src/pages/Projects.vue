@@ -78,7 +78,11 @@ const options = ref();
 const topProjects = ref([]);
 
 const fetchProjects = async () => {
-    const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(4)
+    const { data } = await supabase
+        .from('projects')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .limit(4)
     topProjects.value = data || []
 }
 
