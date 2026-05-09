@@ -51,7 +51,7 @@ import { ref } from 'vue'
 
 const services = ref([
     {
-        title: 'Website Developer',
+        title: 'Website Development',
         icon: 'code-slash-outline',
         description: 'Full-stack web development with modern frameworks and best practices. Building responsive, performant, and accessible web experiences.',
         highlights: [
@@ -61,7 +61,7 @@ const services = ref([
         ]
     },
     {
-        title: 'Software Quality Assurance',
+        title: 'Software Quality Assurance Testing',
         icon: 'checkmark-circle-outline',
         description: 'Comprehensive testing strategies ensuring product reliability and user experience excellence. Manual and automated testing approaches.',
         highlights: [
@@ -71,7 +71,7 @@ const services = ref([
         ]
     },
     {
-        title: 'Bubble.io Developer',
+        title: 'Bubble.io Development',
         icon: 'flash-outline',
         description: 'No-code solutions leveraging Bubble.io for rapid prototyping and deployment. Create powerful applications without extensive coding.',
         highlights: [
