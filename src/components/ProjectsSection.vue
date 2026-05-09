@@ -5,32 +5,19 @@
             <div class="header-label">Portfolio</div>
             <h2 class="header-title">Featured Projects</h2>
             <p class="header-description">
-                A curated selection of recent work highlighting clean design, 
+                A curated selection of recent work highlighting clean design,
                 thoughtful interaction, and technical precision.
             </p>
         </div>
 
         <div class="project-list">
-            <article 
-                v-for="(project, index) in projects" 
-                :key="index"
-                class="section-project-card"
-                :class="{ 'featured': index === 0 }"
-                :style="{ '--card-delay': `${index * 0.06}s` }"
-                @click="openProject(index)"
-                @keydown.enter="openProject(index)"
-                @keydown.space="openProject(index)"
-                role="button"
-                tabindex="0"
-                :aria-label="`View ${project.title} project details`"
-            >
+            <article v-for="(project, index) in projects" :key="index" class="section-project-card"
+                :class="{ 'featured': index === 0 }" :style="{ '--card-delay': `${index * 0.06}s` }"
+                @click="openProject(index)" @keydown.enter="openProject(index)" @keydown.space="openProject(index)"
+                role="button" tabindex="0" :aria-label="`View ${project.title} project details`">
                 <!-- Project Image -->
                 <div class="project-image-wrapper">
-                    <img 
-                        :src="project.image" 
-                        :alt="`${project.title} project preview`"
-                        class="project-image"
-                    />
+                    <img :src="project.image" :alt="`${project.title} project preview`" class="project-image" />
                     <!-- Subtle Project Label Overlay -->
                     <div class="project-label-overlay">
                         <div class="project-label-content">
@@ -44,7 +31,7 @@
                 <div class="project-info">
                     <h3 class="project-title">{{ project.title }}</h3>
                     <p class="project-excerpt">{{ project.excerpt }}</p>
-                    
+
                     <!-- Quick Tech Tags -->
                     <div class="tech-tags" v-if="project.technologies && project.technologies.length">
                         <span v-for="(tech, tIndex) in project.technologies.slice(0, 2)" :key="tIndex" class="tech-tag">
@@ -69,26 +56,29 @@
         <Transition name="modal-fade">
             <div v-if="activeProjectIndex !== null" class="modal-backdrop" @click="closeProject">
                 <div class="modal-container" @click.stop>
-                    <!-- Modal Header with Close Button -->
-                    <button 
-                        class="modal-close-btn" 
-                        @click="closeProject"
-                        aria-label="Close project details"
-                        title="Close (Esc)"
-                    >
-                        <ion-icon name="close-outline"></ion-icon>
-                    </button>
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            <h2>Project Details</h2>
+                            <span>Additional Information.</span>
+                        </div>
+                        <button class="modal-close-btn" @click="closeProject" aria-label="Close project details"
+                            title="Close (Esc)">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                    </div>
 
                     <!-- Modal Content -->
                     <div class="modal-content">
                         <!-- Image Section -->
-                        <div class="modal-image-section">
-                            <img 
-                                :src="activeProject.image" 
-                                :alt="`${activeProject.title} detailed preview`"
-                                class="modal-image"
-                            />
+                        <div class="modal-image-placeholder">
+                            <div class="modal-image-section">
+                                <img :src="activeProject.image" :alt="`${activeProject.title} detailed preview`"
+                                    class="modal-image" />
+                            </div>
+                            <h3>Project description</h3>
+                            <p class="modal-description">{{ activeProject.description }}</p>
                         </div>
+
 
                         <!-- Details Section -->
                         <div class="modal-details">
@@ -97,17 +87,16 @@
                                 <span class="modal-category" v-if="activeProject.category">
                                     {{ activeProject.category }}
                                 </span>
-                                <h2 class="modal-title">{{ activeProject.title }}</h2>
+                                <h2 class="modal-project-title">{{ activeProject.title }}</h2>
                             </div>
 
-                            <!-- Description -->
-                            <p class="modal-description">{{ activeProject.description }}</p>
-
                             <!-- Technologies Section -->
-                            <div class="modal-block" v-if="activeProject.technologies && activeProject.technologies.length">
+                            <div class="modal-block"
+                                v-if="activeProject.technologies && activeProject.technologies.length">
                                 <h3 class="modal-block-title">Technologies</h3>
                                 <div class="modal-tech-grid">
-                                    <span v-for="(tech, index) in activeProject.technologies" :key="index" class="modal-tech-tag">
+                                    <span v-for="(tech, index) in activeProject.technologies" :key="index"
+                                        class="modal-tech-tag">
                                         {{ tech }}
                                     </span>
                                 </div>
@@ -127,23 +116,13 @@
                             <div class="modal-block modal-links-block">
                                 <h3 class="modal-block-title">View Project</h3>
                                 <div class="modal-links">
-                                    <a 
-                                        v-if="activeProject.liveurl" 
-                                        :href="activeProject.liveurl" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        class="modal-link modal-link-primary"
-                                    >
+                                    <a v-if="activeProject.liveurl" :href="activeProject.liveurl" target="_blank"
+                                        rel="noopener noreferrer" class="modal-link modal-link-primary">
                                         <ion-icon name="open-outline"></ion-icon>
                                         <span>Live Demo</span>
                                     </a>
-                                    <a 
-                                        v-if="activeProject.repourl" 
-                                        :href="activeProject.repourl" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        class="modal-link modal-link-secondary"
-                                    >
+                                    <a v-if="activeProject.repourl" :href="activeProject.repourl" target="_blank"
+                                        rel="noopener noreferrer" class="modal-link modal-link-secondary">
                                         <ion-icon name="logo-github"></ion-icon>
                                         <span>Repository</span>
                                     </a>
@@ -166,8 +145,8 @@ const activeProjectIndex = ref(null)
 const projects = ref([])
 
 const fetchProjects = async () => {
-  const { data } = await supabase.from('live_projects').select('*')
-  projects.value = data || []
+    const { data } = await supabase.from('live_projects').select('*')
+    projects.value = data || []
 }
 
 
@@ -236,6 +215,7 @@ onUnmounted(() => {
     text-transform: uppercase;
     color: #999999;
 }
+
 .header-title {
     font-family: "Archivo", Helvetica, Arial, sans-serif;
     font-size: 32px;
@@ -288,6 +268,7 @@ onUnmounted(() => {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -522,6 +503,7 @@ onUnmounted(() => {
         opacity: 0;
         transform: scale(0.96) translateY(24px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -533,7 +515,6 @@ onUnmounted(() => {
    =================================== */
 
 .modal-close-btn {
-    position: absolute;
     top: 20px;
     right: 20px;
     width: 40px;
@@ -550,7 +531,6 @@ onUnmounted(() => {
     color: #333333;
     padding: 0;
     font-family: inherit;
-    z-index: 10;
 }
 
 .modal-close-btn:hover {
@@ -571,7 +551,21 @@ onUnmounted(() => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
-    padding: 48px;
+    padding: 20px 48px;
+}
+.modal-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.modal-image-placeholder h3 {
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: #333333;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .modal-image-section {
@@ -619,7 +613,7 @@ onUnmounted(() => {
     width: fit-content;
 }
 
-.modal-title {
+.modal-project-title {
     font-family: "Archivo", Helvetica, Arial, sans-serif;
     font-size: 32px;
     font-weight: 600;
@@ -627,6 +621,37 @@ onUnmounted(() => {
     color: #0a0a0a;
     margin: 0;
     line-height: 1.2;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-top: 20px;
+}
+
+.modal-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-title h2 {
+    font-size: 28px;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.modal-title span {
+    font-size: 14px;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
+    color: #666666;
+    margin-top: 4px;
 }
 
 .modal-description {
@@ -660,10 +685,6 @@ onUnmounted(() => {
     margin: 0;
 }
 
-/* ===================================
-   MODAL TECH GRID
-   =================================== */
-
 .modal-tech-grid {
     display: flex;
     flex-wrap: wrap;
@@ -686,10 +707,6 @@ onUnmounted(() => {
     background-color: #e8e8e8;
     border-color: #b0b0b0;
 }
-
-/* ===================================
-   MODAL FEATURES LIST
-   =================================== */
 
 .modal-features-list {
     list-style: none;
@@ -718,10 +735,6 @@ onUnmounted(() => {
     color: #0a0a0a;
     font-weight: 600;
 }
-
-/* ===================================
-   MODAL LINKS
-   =================================== */
 
 .modal-links-block {
     padding-top: 4px;
@@ -788,9 +801,6 @@ onUnmounted(() => {
     border-color: #555555;
 }
 
-/* ===================================
-   TRANSITIONS
-   =================================== */
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
@@ -801,10 +811,6 @@ onUnmounted(() => {
 .modal-fade-leave-to {
     opacity: 0;
 }
-
-/* ===================================
-   RESPONSIVE: TABLET (1024px)
-   =================================== */
 
 @media (max-width: 1024px) {
     .projects-section {
@@ -832,9 +838,6 @@ onUnmounted(() => {
     }
 }
 
-/* ===================================
-   RESPONSIVE: PORTRAIT (ORIENTATION)
-   =================================== */
 
 @media (orientation: portrait) and (max-width: 1024px) {
     .project-list {
@@ -855,9 +858,6 @@ onUnmounted(() => {
     }
 }
 
-/* ===================================
-   RESPONSIVE: MOBILE (768px)
-   =================================== */
 
 @media (max-width: 768px) {
     .projects-section {
@@ -940,9 +940,6 @@ onUnmounted(() => {
     }
 }
 
-/* ===================================
-   RESPONSIVE: SMALL MOBILE (480px)
-   =================================== */
 
 @media (max-width: 480px) {
     .projects-section {
