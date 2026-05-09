@@ -55,9 +55,9 @@ const services = ref([
         icon: 'code-slash-outline',
         description: 'Full-stack web development with modern frameworks and best practices. Building responsive, performant, and accessible web experiences.',
         highlights: [
-            'Vue.js & React',
-            'Responsive Design',
-            'Performance Optimization'
+            'Responsive & mobile-first design',
+            'Performance optimization & lazy loading',
+            'Basic SEO & metadata implementation',
         ]
     },
     {
@@ -78,6 +78,16 @@ const services = ref([
             'No-Code Development',
             'Rapid Prototyping',
             'Custom Plugins'
+        ]
+    },
+    {
+        title: 'SEO Optimization',
+        icon: 'analytics-outline',
+        description: 'Technical and on-page SEO strategies to improve search engine visibility, site crawlability, and overall web performance.',
+        highlights: [
+            'Sitemap & robots.txt setup',
+            'On-page SEO: meta tags & headings',
+            'Performance & mobile optimization'
         ]
     }
 ])
