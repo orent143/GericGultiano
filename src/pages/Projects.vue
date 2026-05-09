@@ -229,8 +229,9 @@ onMounted(() => {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    max-height: fit-content;
-    max-width: fit-content;
+    height: 100%;
+    width: 100%;
+
     flex-wrap: wrap;
     gap: 5px;
     padding: 0;
@@ -240,7 +241,7 @@ onMounted(() => {
 .project-card {
     display: flex;
     align-items: flex-end;
-    height: 20%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     border-radius: 10px;

@@ -29,38 +29,21 @@
 
             </div>
         </div>
-        <div class="project-container">
-            <div class="label">
-                <h2>Live Projects</h2>
-                <a href="/projects" class="view-more-link">View all projects<ion-icon name="arrow-forward-outline"
-                        class="view-icon"></ion-icon></a>
-            </div>
-            <ul class="project-cards">
-                <li v-for="(project, index) in liveProjects" :key="index" class="project-card"
-                    :style="getProjectStyle(project.image)">
-                    <div class="project-content">
-                        <h2>
-                            <a :href="getProjectUrl(project.live_url)" target="_blank" rel="noopener noreferrer"
-                                class="project-link">
-                                {{ project.title }}</a>
-                        </h2>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <Services />
+        <ProjectsSection />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import Timeline from 'primevue/timeline';
+import Services from '@/components/Services.vue';
+import ProjectsSection from '@/components/ProjectsSection.vue';
 import { supabase } from '@/lib/supabase'
 
 const loading = ref(false)
 const experiences = ref([])
 const homeContent = ref({ about_me: '', experience_intro: '' })
-const liveProjects = ref([])
-const loadingProjects = ref(false)
 
 const fetchExperiences = async () => {
   loading.value = true
@@ -75,26 +58,9 @@ const fetchHomeContent = async () => {
   if (data) homeContent.value = data
 }
 
-const fetchLiveProjects = async () => {
-  loadingProjects.value = true
-  const { data } = await supabase.from('live_projects').select('*').order('created_at', { ascending: false })
-  liveProjects.value = data || []
-  loadingProjects.value = false
-}
-
-
-const getProjectStyle = (image) => ({
-    backgroundImage: `url('${image}')`,
-});
-
-const getProjectUrl = (liveUrl) => {
-    return liveUrl;
-};
-
 onMounted(() => {
     fetchHomeContent(),
-    fetchExperiences(),
-    fetchLiveProjects()
+    fetchExperiences()
 })
 </script>
 
@@ -230,88 +196,6 @@ p {
     right: 0px;
 }
 
-.project-container {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 40px;
-}
-
-.label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.project-cards {
-    list-style: none;
-    display: flex;
-    gap: 50px;
-    padding: 0;
-}
-
-.project-cards li {
-    background-color: #f3f4f6;
-    padding-top: 20px;
-    border-radius: 12px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    text-align: center;
-}
-
-.view-more-link {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-family: "inter", sans-serif;
-    font-size: 15px;
-    color: #333333;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.view-icon {
-    font-size: 20px;
-    color: #333333;
-}
-
-.project-card {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 220px;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-}
-
-.project-cards :hover {
-    transform: scale(1.02);
-    transition: transform 0.3s ease;
-}
-
-.project-content {
-    width: 100%;
-    padding: 16px;
-    background-color: rgba(4, 4, 4, 0.248);
-    backdrop-filter: blur(20px);
-}
-
-.project-link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    color: inherit;
-}
-
-.project-content a {
-    color: #ffffff;
-    font-size: 18px;
-    font-family: "archivo", sans-serif;
-    font-weight: 400;
-}
-
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
     .home-container {
@@ -341,21 +225,6 @@ p {
 
     .second-section {
         width: 100%;
-    }
-
-    .project-cards {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .project-card {
-        min-height: 180px;
-    }
-
-    .label {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
     }
 }
 </style>

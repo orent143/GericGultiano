@@ -50,7 +50,7 @@
 import Navbar from "@/components/Navbar.vue";
 import { onMounted, ref } from "vue";
 import { supabase } from "@/lib/supabase";
-import cvUrl from "@/assets/GericResume.pdf";
+import cvUrl from "@/assets/GericGultiano_Resume.pdf";
 import profPic from "@/assets/pic1.png";
 
 const profile = ref(null);
