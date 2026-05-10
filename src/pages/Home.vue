@@ -31,8 +31,6 @@
         </div>
         <Services />
         <ProjectsSection />
-        <Services />
-        <ProjectsSection />
     </div>
 </template>
 
