@@ -11,9 +11,10 @@
                 </div>
                 <div ref="calendar" class="github-calendar"></div>
                 <div class="github-redirection">
-                        <a href="https://github.com/orent143" target="_blank" rel="noopener noreferrer" >
-                            <ion-icon name="logo-github" class="table-icon"></ion-icon><h3>Visit my GitHub for more.</h3>
-                        </a>
+                    <a href="https://github.com/orent143" target="_blank" rel="noopener noreferrer">
+                        <ion-icon name="logo-github" class="table-icon"></ion-icon>
+                        <h3>Visit my GitHub for more.</h3>
+                    </a>
                 </div>
             </div>
         </div>
@@ -21,14 +22,14 @@
             <div class="recent-projects">
                 <div class="projects-header">
                     <h1>My Recent Projects <span class="description">List of my top projects</span></h1>
-                    <router-link to="/all-projects" class="view-all-btn">View all <ion-icon name="arrow-forward-outline"></ion-icon></router-link>
+                    <router-link to="/all-projects" class="view-all-btn">View all <ion-icon
+                            name="arrow-forward-outline"></ion-icon></router-link>
                 </div>
                 <ul class="top-project-list">
                     <li v-for="(project, index) in topProjects" :key="index" class="project-card"
                         :style="projectStyle(project.image_url)">
                         <div class="project-info">
-                            <a :href="project.live_url" target="_blank" rel="noopener noreferrer"
-                                class="project-link">
+                            <a :href="project.live_url" target="_blank" rel="noopener noreferrer" class="project-link">
                                 {{ project.title }}
                             </a>
                             <p class="project-description">{{ project.description }}</p>
@@ -65,9 +66,11 @@
         <!-- QA & Testing Section -->
         <div class="qa-section">
             <div class="qa-header">
-                <h1>Quality Assurance & Testing<span>Testing strategy, test automation, and defect prevention that prevents issues before they reach production</span></h1>
+                <h1>Quality Assurance & Testing<span>Testing strategy, test automation, and defect prevention that
+                        prevents
+                        issues before they reach production</span></h1>
             </div>
-            
+
             <div class="qa-bento-grid">
                 <!-- Case Study 1: Colina Health -->
                 <div class="qa-card qa-case-study">
@@ -82,15 +85,20 @@
                         <div class="qa-problem-impact">
                             <div class="qa-stat-block">
                                 <p class="qa-stat-label">The Challenge</p>
-                                <p class="qa-stat-value">Ensuring 100% stable releases for critical healthcare workflows where accuracy is vital.</p>
+                                <p class="qa-stat-value">Ensuring 100% stable releases for critical healthcare workflows
+                                    where
+                                    accuracy is vital.</p>
                             </div>
                             <div class="qa-stat-block">
                                 <p class="qa-stat-label">The Solution</p>
-                                <p class="qa-stat-value">Structured exploratory and E2E testing with strict acceptance criteria validation.</p>
+                                <p class="qa-stat-value">Structured exploratory and E2E testing with strict acceptance
+                                    criteria
+                                    validation.</p>
                             </div>
                             <div class="qa-stat-block">
                                 <p class="qa-stat-label">The Impact</p>
-                                <p class="qa-stat-value">Identified and documented reproducible defects with logs and recordings, enabling faster debugging and preventing production issues.</p>
+                                <p class="qa-stat-value">Identified and documented reproducible defects with logs and
+                                    recordings, enabling faster debugging and preventing production issues.</p>
                             </div>
                         </div>
                     </div>
@@ -113,15 +121,20 @@
                         <div class="qa-problem-impact">
                             <div class="qa-stat-block">
                                 <p class="qa-stat-label">The Challenge</p>
-                                <p class="qa-stat-value">Validating complex business logic to prevent calculation errors in real-time inventory tracking.</p>
+                                <p class="qa-stat-value">Validating complex business logic to prevent calculation errors
+                                    in
+                                    real-time inventory tracking.</p>
                             </div>
                             <div class="qa-stat-block">
                                 <p class="qa-stat-label">The Solution</p>
-                                <p class="qa-stat-value">Designed manual functional tests and automated test scripts using Cypress framework.</p>
+                                <p class="qa-stat-value">Designed manual functional tests and automated test scripts
+                                    using
+                                    Cypress framework.</p>
                             </div>
                             <div class="qa-stat-block">
                                 <p class="qa-stat-label">The Impact</p>
-                                <p class="qa-stat-value">Achieved high reliability in system performance and accuracy, significantly increasing overall test coverage.</p>
+                                <p class="qa-stat-value">Achieved high reliability in system performance and accuracy,
+                                    significantly increasing overall test coverage.</p>
                             </div>
                         </div>
                     </div>
@@ -161,17 +174,44 @@
                     </div>
                 </div>
 
-                <!-- CTA Section -->
-                <div class="qa-cta-card">
-                    <div class="qa-cta-content">
-                        <h3>Ready to elevate your testing strategy?</h3>
-                        <p>I bring systematic QA practices that reduce defects, improve reliability, and accelerate release cycles.</p>
-                    </div>
-                    <router-link to="/contact" class="qa-cta-btn">Let's talk <ion-icon name="arrow-forward-outline"></ion-icon></router-link>
+            </div>
+
+            <!-- QA Documentation Gateway -->
+            <div class="qa-documentation-gateway">
+                <button class="qa-doc-gateway-btn" @click="showQADocumentation = true">
+                    <span class="qa-doc-gateway-icon">
+                        <ion-icon name="document-outline"></ion-icon>
+                    </span>
+                    <span class="qa-doc-gateway-text">
+                        <strong>Explore QA Artifacts</strong>
+                        <span>Test cases, defect reports, E2E testing evidence</span>
+                    </span>
+                    <ion-icon name="chevron-forward-outline" class="qa-doc-gateway-arrow"></ion-icon>
+                </button>
+            </div>
+            <!-- CTA Section -->
+            <div class="qa-cta-card">
+                <div class="qa-cta-content">
+                    <h3>Ready to elevate your testing strategy?</h3>
+                    <p>I bring systematic QA practices that reduce defects, improve reliability, and accelerate release
+                        cycles.
+                    </p>
                 </div>
+                <router-link to="/contact" class="qa-cta-btn">Let's talk 
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                </router-link>
             </div>
         </div>
     </div>
+
+    <!-- QA Documentation Modal -->
+    <transition name="qa-modal">
+        <div v-if="showQADocumentation" class="qa-documentation-modal-overlay" @click="showQADocumentation = false">
+            <div class="qa-documentation-modal-content" @click.stop>
+                <QADocumentation :isModal="true" @close="showQADocumentation = false" />
+            </div>
+        </div>
+    </transition>
 </template>
 
 <script setup>
@@ -181,11 +221,13 @@ import CascadeSelect from 'primevue/cascadeselect';
 import GitHubCalendar from "github-calendar"
 import "github-calendar/dist/github-calendar.css"
 import Timeline from 'primevue/timeline';
+import QADocumentation from '@/components/QADocumentation.vue'
 
 const repository = ref([]);
 const calendar = ref(null)
 const options = ref();
 const topProjects = ref([]);
+const showQADocumentation = ref(false);
 
 const fetchProjects = async () => {
     const { data } = await supabase
@@ -397,6 +439,7 @@ onMounted(() => {
     border-radius: 15px;
     font-weight: 150;
 }
+
 .github-table {
     display: flex;
     flex-direction: column;
@@ -409,52 +452,63 @@ onMounted(() => {
         0px 0px 0px 1px rgba(18, 55, 105, 0.08);
 
 }
+
 .github-table-title {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 30px;
 }
+
 .github-table-title h2 {
     font-size: 20px;
     margin-bottom: 0px;
     font-weight: 550;
     color: #333333;
 }
+
 .github-table-title span {
     font-size: 14px;
     font-weight: 400;
     color: #666666;
 }
+
 .github-redirection {
     margin-top: 10px;
     display: flex;
     justify-content: center;
 }
+
 .github-redirection a {
     color: #333333;
     text-decoration: none;
     display: flex;
     align-items: center;
 }
+
 .github-redirection .table-icon {
     color: #666666;
     font-size: 20px;
     transition: 0.3s ease;
 }
+
 .github-redirection h3 {
-    color: #666666;;
+    color: #666666;
+    ;
     font-size: 15px;
     font-weight: 400;
     transition: 0.3s ease;
 }
+
 .github-redirection a:hover .table-icon {
     color: #020617;
 }
+
 .github-redirection a:hover h3 {
     color: #020617;
     font-weight: bold;
 }
+
 .github-calendar {
     height: 100%;
     width: 100%;
@@ -624,12 +678,11 @@ onMounted(() => {
 .qa-header h1 {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    font-size: 28px;
-    font-weight: 600;
-    color: #1f2937;
-    margin: 0;
-    letter-spacing: -0.5px;
+    font-size: 25px;
+    font-weight: 550;
+    color: #333333;
+    gap: 10px;
+    margin-bottom: 0;
 }
 
 .qa-header span {
@@ -915,171 +968,330 @@ onMounted(() => {
     font-size: 16px;
 }
 
+/* ---- QA Documentation Modal ---- */
+.qa-documentation-gateway {
+    width: 100%;
+    padding: 0;
+}
+
+.qa-doc-gateway-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 20px 24px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.qa-doc-gateway-btn:hover {
+    border-color: #d1d5db;
+    background-color: #fafbfc;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.qa-doc-gateway-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    background-color: #f3f4f6;
+    border-radius: 6px;
+    font-size: 20px;
+    color: #374151;
+    flex-shrink: 0;
+}
+
+.qa-doc-gateway-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.qa-doc-gateway-text strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.qa-doc-gateway-text span {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.qa-doc-gateway-arrow {
+    font-size: 18px;
+    color: #d1d5db;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.qa-doc-gateway-btn:hover .qa-doc-gateway-arrow {
+    color: #9ca3af;
+    transform: translateX(4px);
+}
+
+.qa-documentation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 20px;
+}
+
+.qa-documentation-modal-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    max-width: 1200px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.qa-modal-enter-active,
+.qa-modal-leave-active {
+    transition: all 0.3s ease;
+}
+
+.qa-modal-enter-from {
+    opacity: 0;
+}
+
+.qa-modal-enter-from .qa-documentation-modal-content {
+    transform: scale(0.95);
+}
+
+.qa-modal-leave-to {
+    opacity: 0;
+}
+
+.qa-modal-leave-to .qa-documentation-modal-content {
+    transform: scale(0.95);
+}
+
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
-  .projects-container {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
+    .projects-container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 
-  .qa-capabilities-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
+    .qa-capabilities-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
 
-  .qa-capability:not(:last-child) {
-    padding-right: 24px;
-  }
+    .qa-capability:not(:last-child) {
+        padding-right: 24px;
+    }
 }
 
 @media (max-width: 768px) {
-  .projects-container {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+    .projects-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
-  .qa-bento-grid {
-    grid-template-columns: 1fr;
-  }
+    .qa-bento-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .qa-capabilities {
-    grid-column: 1;
-    grid-row: auto;
-  }
+    .qa-capabilities {
+        grid-column: 1;
+        grid-row: auto;
+    }
 
-  .qa-capabilities-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+    .qa-capabilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
 
-  .qa-capability:not(:last-child) {
-    border-right: none;
-    padding-right: 0;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #f3f4f6;
-  }
+    .qa-capability:not(:last-child) {
+        border-right: none;
+        padding-right: 0;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f3f4f6;
+    }
 
-  .qa-capability:nth-child(3) {
-    grid-column: 1 / -1;
-  }
+    .qa-capability:nth-child(3) {
+        grid-column: 1 / -1;
+    }
 
-  .qa-cta-card {
-    grid-column: 1 / -1;
-    flex-direction: column;
-    text-align: left;
-    gap: 20px;
-    align-items: flex-start;
-  }
+    .qa-cta-card {
+        grid-column: 1 / -1;
+        flex-direction: column;
+        text-align: left;
+        gap: 20px;
+        align-items: flex-start;
+    }
 
-  .qa-cta-btn {
-    align-self: flex-start;
-  }
+    .qa-cta-btn {
+        align-self: flex-start;
+    }
 
-  .qa-header h1 {
-    font-size: 22px;
-  }
+    .qa-doc-gateway-btn {
+        padding: 16px 20px;
+        gap: 12px;
+    }
 
-  .qa-header span {
-    font-size: 14px;
-  }
+    .qa-doc-gateway-text strong {
+        font-size: 13px;
+    }
 
-  .bottom-section {
-    flex-direction: column;
-  }
+    .qa-doc-gateway-text span {
+        font-size: 11px;
+    }
 
-  .recent-projects {
-    width: 100%;
-  }
+    .qa-documentation-modal-content {
+        padding: 24px;
+        max-height: 85vh;
+        border-radius: 12px;
+    }
 
-  .top-project-list {
-    grid-template-columns: 1fr;
-  }
+    .qa-header h1 {
+        font-size: 22px;
+    }
 
-  .github-contributions {
-    width: 100%;
-  }
+    .qa-header span {
+        font-size: 14px;
+    }
 
-  .github-title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+    .bottom-section {
+        flex-direction: column;
+    }
 
-  .github-calendar {
-    overflow-x: auto;
-  }
+    .recent-projects {
+        width: 100%;
+    }
+
+    .top-project-list {
+        grid-template-columns: 1fr;
+    }
+
+    .github-contributions {
+        width: 100%;
+    }
+
+    .github-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .github-calendar {
+        overflow-x: auto;
+    }
 }
 
 @media (max-width: 480px) {
-  .qa-header h1 {
-    font-size: 20px;
-  }
+    .qa-header h1 {
+        font-size: 20px;
+    }
 
-  .qa-card {
-    padding: 20px;
-  }
+    .qa-card {
+        padding: 20px;
+    }
 
-  .qa-card-header {
-    gap: 10px;
-    margin-bottom: 16px;
-  }
+    .qa-card-header {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
 
-  .qa-card h3 {
-    font-size: 15px;
-  }
+    .qa-card h3 {
+        font-size: 15px;
+    }
 
-  .qa-stat-label {
-    font-size: 11px;
-  }
+    .qa-stat-label {
+        font-size: 11px;
+    }
 
-  .qa-stat-value {
-    font-size: 13px;
-  }
+    .qa-stat-value {
+        font-size: 13px;
+    }
 
-  .tech-item {
-    font-size: 11px;
-    padding: 5px 10px;
-  }
+    .tech-item {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
 
-  .qa-capabilities {
-    padding: 20px;
-    gap: 18px;
-  }
+    .qa-capabilities {
+        padding: 20px;
+        gap: 18px;
+    }
 
-  .qa-capabilities-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+    .qa-capabilities-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
 
-  .qa-capability:not(:last-child) {
-    border-right: none;
-    padding-right: 0;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #f3f4f6;
-  }
+    .qa-capability:not(:last-child) {
+        border-right: none;
+        padding-right: 0;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #f3f4f6;
+    }
 
-  .qa-capability-label {
-    font-size: 10px;
-  }
+    .qa-capability-label {
+        font-size: 10px;
+    }
 
-  .qa-cta-card {
-    padding: 20px;
-  }
+    .qa-cta-card {
+        padding: 20px;
+    }
 
-  .qa-cta-card h3 {
-    font-size: 16px;
-  }
+    .qa-cta-card h3 {
+        font-size: 16px;
+    }
 
-  .qa-cta-card p {
-    font-size: 13px;
-  }
+    .qa-cta-card p {
+        font-size: 13px;
+    }
 
-  .qa-cta-btn {
-    padding: 9px 16px;
-    font-size: 13px;
-    width: 100%;
-    justify-content: center;
-  }
+    .qa-cta-btn {
+        padding: 9px 16px;
+        font-size: 13px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .qa-doc-gateway-btn {
+        padding: 14px 16px;
+        gap: 10px;
+    }
+
+    .qa-doc-gateway-icon {
+        min-width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .qa-doc-gateway-text strong {
+        font-size: 12px;
+    }
+
+    .qa-doc-gateway-text span {
+        font-size: 10px;
+    }
+
+    .qa-documentation-modal-content {
+        padding: 16px;
+        max-height: 95vh;
+    }
 }
 </style>
