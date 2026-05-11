@@ -168,63 +168,63 @@ const categories = ['All', 'Test Case', 'Bug Report', 'E2E Testing', 'UAT', 'Reg
 const qaDocuments = [
     {
         id: 1,
-        title: 'Colina Health Login Flow - E2E Test Suite',
+        title: 'Finance Dashboard - User Authentication E2E Test Suite',
         category: 'E2E Testing',
-        project: 'Colina Health App',
-        scope: 'User authentication, SSO integration, login error handling',
-        summary: 'Comprehensive end-to-end testing of login workflows including single sign-on, password reset, and error states. All critical paths validated.',
+        project: 'Enterprise Finance Platform',
+        scope: 'User login flows, SSO integration, multi-factor authentication, session management',
+        summary: 'Comprehensive end-to-end testing of authentication workflows including OAuth integration, password reset flows, and MFA challenges. All critical paths validated across browsers.',
         executionDate: '2025-11-15',
         status: 'Pass',
-        tools: ['Cypress', 'Azure Boards'],
+        tools: ['Cypress', 'GitHub Actions'],
         severity: null,
         attachments: [
-            { name: 'e2e-login-report.pdf', url: '#' },
-            { name: 'cypress-logs.txt', url: '#' }
+            { name: 'e2e-auth-report.pdf', url: '#' },
+            { name: 'test-execution-logs.txt', url: '#' }
         ]
     },
     {
         id: 2,
-        title: 'Canteen System - Inventory Calculation Bug Report',
+        title: 'Inventory Management - Stock Calculation Bug Report',
         category: 'Bug Report',
-        project: 'School Canteen System',
-        scope: 'Real-time inventory tracking, stock deduction logic',
-        summary: 'Identified critical bug in inventory calculation during peak hours. Stock count was not properly decremented when items exceed threshold. Root cause: race condition in async stock update.',
+        project: 'Warehouse Management System',
+        scope: 'Real-time inventory tracking, stock level calculations, quantity updates',
+        summary: 'Identified critical issue in inventory calculation logic during concurrent updates. Stock levels were not properly synchronized when multiple users updated inventory simultaneously. Root cause: database concurrency constraint violation.',
         executionDate: '2025-10-22',
         status: 'Resolved',
-        tools: ['Postman', 'Azure Boards'],
+        tools: ['Postman', 'Jira'],
         severity: 'Critical',
         attachments: [
             { name: 'bug-reproduction-steps.md', url: '#' },
-            { name: 'screenshot-inventory-mismatch.png', url: '#' },
-            { name: 'server-logs.zip', url: '#' }
+            { name: 'error-logs.png', url: '#' },
+            { name: 'database-trace.zip', url: '#' }
         ]
     },
     {
         id: 3,
-        title: 'Canteen POS System - Payment Integration UAT',
+        title: 'Payment Gateway Integration - End-to-End UAT',
         category: 'UAT',
-        project: 'School Canteen System',
-        scope: 'End-to-end payment flow, transaction reconciliation, reporting',
-        summary: 'User acceptance testing for payment module including credit card processing, refunds, and daily settlement reports. All acceptance criteria met.',
+        project: 'SaaS Billing Platform',
+        scope: 'Payment processing, transaction settlement, refund workflows, reconciliation reporting',
+        summary: 'User acceptance testing for payment module including credit card processing, bank transfer handling, refunds, and daily settlement verification. All business requirements and acceptance criteria verified.',
         executionDate: '2025-11-08',
         status: 'Pass',
-        tools: ['Manual Testing', 'Azure Boards'],
+        tools: ['Manual Testing', 'Jira'],
         severity: null,
         attachments: [
-            { name: 'uat-checklist-completed.xlsx', url: '#' },
-            { name: 'stakeholder-sign-off.pdf', url: '#' }
+            { name: 'uat-sign-off.xlsx', url: '#' },
+            { name: 'stakeholder-approval.pdf', url: '#' }
         ]
     },
     {
         id: 4,
-        title: 'Colina Health - API Authentication Test Cases',
+        title: 'REST API - Authentication & Authorization Test Cases',
         category: 'Test Case',
-        project: 'Colina Health App',
-        scope: 'REST API authentication, JWT token validation, authorization',
-        summary: 'Test cases for API authentication including valid/invalid tokens, expired sessions, role-based access control, and permission validation.',
+        project: 'Microservices Backend',
+        scope: 'API authentication, JWT token validation, role-based access control, permission enforcement',
+        summary: 'Comprehensive test cases for API authentication layer including valid/invalid tokens, expired credentials, scope validation, and permission-denied scenarios across all endpoints.',
         executionDate: '2025-11-10',
         status: 'Pass',
-        tools: ['Postman', 'Cypress'],
+        tools: ['Postman', 'Newman'],
         severity: null,
         attachments: [
             { name: 'api-test-cases.json', url: '#' },
@@ -233,66 +233,66 @@ const qaDocuments = [
     },
     {
         id: 5,
-        title: 'Canteen System v1.2.0 - Regression Test Suite',
+        title: 'Product Release v2.3.0 - Regression Test Suite',
         category: 'Regression',
-        project: 'School Canteen System',
-        scope: 'Core functionality after v1.2.0 release (UI updates, performance improvements)',
-        summary: 'Regression testing to ensure no regressions in core workflows. Tested item management, stock tracking, user creation, and reporting.',
+        project: 'SaaS Analytics Dashboard',
+        scope: 'Core dashboard functionality, report generation, data visualization, export features',
+        summary: 'Regression testing following v2.3.0 release including all existing features, UI updates, and new chart components. Tested data accuracy, report calculations, and export functionality.',
         executionDate: '2025-11-05',
         status: 'Pass',
-        tools: ['Cypress', 'Azure Boards'],
+        tools: ['Cypress', 'GitHub Actions'],
         severity: null,
         attachments: [
-            { name: 'regression-test-results.html', url: '#' },
-            { name: 'test-execution-summary.md', url: '#' }
+            { name: 'regression-results.html', url: '#' },
+            { name: 'test-summary.md', url: '#' }
         ]
     },
     {
         id: 6,
-        title: 'Colina Health - Database Query Performance Test',
+        title: 'Search Service - Load & Performance Testing',
         category: 'API Testing',
-        project: 'Colina Health App',
-        scope: 'Database query optimization, API response times under load',
-        summary: 'Performance testing of critical API endpoints including load testing with 1000+ concurrent users. Identified N+1 queries that were optimized.',
+        project: 'E-Commerce Platform',
+        scope: 'Database query performance, API response times, concurrent user load, search indexing',
+        summary: 'Performance testing of search API endpoints under load including 5000+ concurrent users, large result sets, and complex filter combinations. Identified query optimization opportunities.',
         executionDate: '2025-11-12',
         status: 'Pass',
-        tools: ['Postman', 'JMeter'],
+        tools: ['k6', 'DataDog'],
         severity: null,
         attachments: [
-            { name: 'load-test-results.csv', url: '#' },
-            { name: 'performance-report.pdf', url: '#' }
+            { name: 'performance-metrics.csv', url: '#' },
+            { name: 'load-test-report.pdf', url: '#' }
         ]
     },
     {
         id: 7,
-        title: 'Canteen System - Mobile Responsive Testing',
+        title: 'Mobile App - Responsive Design Testing',
         category: 'Test Case',
-        project: 'School Canteen System',
-        scope: 'Mobile UI/UX on iOS and Android, responsive design validation',
-        summary: 'Testing mobile experience across iOS (Safari) and Android (Chrome). Validated touch interactions, layout responsiveness, and performance on slow connections.',
+        project: 'Cross-Platform Mobile App',
+        scope: 'iOS and Android compatibility, responsive layouts, touch interactions, device-specific features',
+        summary: 'Testing mobile application across iOS (Safari) and Android (Chrome) including touch interactions, layout responsiveness, and performance on 3G connections. Validated accessibility features.',
         executionDate: '2025-10-28',
         status: 'Pass',
-        tools: ['Manual Testing', 'iOS/Android Devices'],
+        tools: ['Manual Testing', 'BrowserStack'],
         severity: null,
         attachments: [
             { name: 'mobile-testing-report.pdf', url: '#' },
-            { name: 'device-compatibility-matrix.xlsx', url: '#' }
+            { name: 'device-matrix.xlsx', url: '#' }
         ]
     },
     {
         id: 8,
-        title: 'Colina Health - Security & HIPAA Compliance Test Plan',
+        title: 'Data Privacy - Compliance & Security Test Plan',
         category: 'Test Plan',
-        project: 'Colina Health App',
-        scope: 'HIPAA compliance, data encryption, access controls, audit logging',
-        summary: 'Test plan for healthcare-specific security requirements including patient data protection, encryption at rest/transit, and HIPAA audit trails.',
+        project: 'Secure Data Platform',
+        scope: 'Data encryption, access control, audit logging, regulatory compliance, data residency',
+        summary: 'Comprehensive test plan for security and compliance requirements including data encryption validation, role-based access enforcement, audit trail verification, and regulatory compliance checks.',
         executionDate: '2025-11-01',
         status: 'In Progress',
-        tools: ['Manual Testing', 'Security Tools'],
+        tools: ['Manual Testing', 'Security Scanner'],
         severity: null,
         attachments: [
-            { name: 'hipaa-test-plan.md', url: '#' },
-            { name: 'security-checklist.md', url: '#' }
+            { name: 'security-test-plan.md', url: '#' },
+            { name: 'compliance-checklist.md', url: '#' }
         ]
     }
 ]
