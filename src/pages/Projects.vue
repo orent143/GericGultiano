@@ -183,7 +183,7 @@
                         <ion-icon name="document-outline"></ion-icon>
                     </span>
                     <span class="qa-doc-gateway-text">
-                        <strong>Explore QA Artifacts</strong>
+                        <strong>Explore Testing Documentation</strong>
                         <span>Test cases, defect reports, E2E testing evidence</span>
                     </span>
                     <ion-icon name="chevron-forward-outline" class="qa-doc-gateway-arrow"></ion-icon>
