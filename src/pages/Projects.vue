@@ -61,6 +61,116 @@
                 </Timeline>
             </div>
         </div>
+
+        <!-- QA & Testing Section -->
+        <div class="qa-section">
+            <div class="qa-header">
+                <h1>Quality Assurance & Testing<span>Testing strategy, test automation, and defect prevention that prevents issues before they reach production</span></h1>
+            </div>
+            
+            <div class="qa-bento-grid">
+                <!-- Case Study 1: Colina Health -->
+                <div class="qa-card qa-case-study">
+                    <div class="qa-card-header">
+                        <div class="qa-card-title-group">
+                            <h3>Colina Health App</h3>
+                            <p class="qa-subtitle">Overseas Healthcare Platform</p>
+                            <span class="role-badge">QA Tester Intern</span>
+                        </div>
+                    </div>
+                    <div class="qa-card-content">
+                        <div class="qa-problem-impact">
+                            <div class="qa-stat-block">
+                                <p class="qa-stat-label">The Challenge</p>
+                                <p class="qa-stat-value">Ensuring 100% stable releases for critical healthcare workflows where accuracy is vital.</p>
+                            </div>
+                            <div class="qa-stat-block">
+                                <p class="qa-stat-label">The Solution</p>
+                                <p class="qa-stat-value">Structured exploratory and E2E testing with strict acceptance criteria validation.</p>
+                            </div>
+                            <div class="qa-stat-block">
+                                <p class="qa-stat-label">The Impact</p>
+                                <p class="qa-stat-value">Identified and documented reproducible defects with logs and recordings, enabling faster debugging and preventing production issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qa-card-footer">
+                        <span class="tech-item">Azure Boards</span>
+                        <span class="tech-item">Functional Testing</span>
+                    </div>
+                </div>
+
+                <!-- Case Study 2: Canteen System -->
+                <div class="qa-card qa-case-study">
+                    <div class="qa-card-header">
+                        <div class="qa-card-title-group">
+                            <h3>School Canteen System</h3>
+                            <p class="qa-subtitle">Inventory & POS Management</p>
+                            <span class="role-badge">QA Analyst</span>
+                        </div>
+                    </div>
+                    <div class="qa-card-content">
+                        <div class="qa-problem-impact">
+                            <div class="qa-stat-block">
+                                <p class="qa-stat-label">The Challenge</p>
+                                <p class="qa-stat-value">Validating complex business logic to prevent calculation errors in real-time inventory tracking.</p>
+                            </div>
+                            <div class="qa-stat-block">
+                                <p class="qa-stat-label">The Solution</p>
+                                <p class="qa-stat-value">Designed manual functional tests and automated test scripts using Cypress framework.</p>
+                            </div>
+                            <div class="qa-stat-block">
+                                <p class="qa-stat-label">The Impact</p>
+                                <p class="qa-stat-value">Achieved high reliability in system performance and accuracy, significantly increasing overall test coverage.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qa-card-footer">
+                        <span class="tech-item">Cypress</span>
+                        <span class="tech-item">Automated Testing</span>
+                    </div>
+                </div>
+
+                <!-- Core Capabilities -->
+                <div class="qa-capabilities">
+                    <div class="qa-card-header">
+                        <div class="qa-card-icon">
+                            <ion-icon name="Construct-outline"></ion-icon>
+                        </div>
+                        <h3>Testing Expertise</h3>
+                    </div>
+                    <div class="qa-capabilities-grid">
+                        <div class="qa-capability">
+                            <p class="qa-capability-label">Testing Methodologies</p>
+                            <span class="tech-item">Functional Testing</span>
+                            <span class="tech-item">Exploratory Testing</span>
+                            <span class="tech-item">E2E Testing</span>
+                        </div>
+                        <div class="qa-capability">
+                            <p class="qa-capability-label">Tools & Frameworks</p>
+                            <span class="tech-item">Cypress</span>
+                            <span class="tech-item">Postman</span>
+                            <span class="tech-item">Azure Boards</span>
+                        </div>
+                        <div class="qa-capability">
+                            <p class="qa-capability-label">Quality Practices</p>
+                            <span class="tech-item">Test Case Documentation</span>
+                            <span class="tech-item">Bug Reporting & Tracking</span>
+                            <span class="tech-item">Agile Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="qa-cta-card">
+                    <div class="qa-cta-content">
+                        <h3>Ready to elevate your testing strategy?</h3>
+                        <p>I bring systematic QA practices that reduce defects, improve reliability, and accelerate release cycles.</p>
+                    </div>
+                    <router-link to="/contact" class="qa-cta-btn">Let's talk <ion-icon name="arrow-forward-outline"></ion-icon></router-link>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -244,7 +354,7 @@ onMounted(() => {
     height: 100%;
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding-top: 15px;
     color: #ffffff;
@@ -497,11 +607,329 @@ onMounted(() => {
     margin-bottom: 0;
 }
 
+/* ---- QA Section Styles ---- */
+.qa-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
+
+.qa-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.qa-header h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.qa-header span {
+    font-size: 15px;
+    font-weight: 400;
+    color: #6b7280;
+    max-width: 680px;
+    line-height: 1.6;
+}
+
+.qa-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    gap: 16px;
+}
+
+.qa-card {
+    background-color: #ffffff;
+    padding: 28px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+}
+
+.qa-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.qa-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.qa-card-icon {
+    font-size: 22px;
+    color: #374151;
+    background-color: #f3f4f6;
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+.qa-card h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.qa-subtitle {
+    font-size: 13px;
+    color: #9ca3af;
+    margin: 0;
+    font-weight: 400;
+}
+
+.qa-card-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.qa-card-title-group h3 {
+    margin: 0;
+}
+
+.qa-card-title-group p {
+    margin: 0;
+}
+
+.role-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #047857;
+    background-color: #ecfdf5;
+    border: 1px solid #d1fae5;
+    padding: 5px 11px;
+    border-radius: 12px;
+    margin-top: 6px;
+    width: fit-content;
+}
+
+.qa-case-study {
+    grid-column: span 1;
+}
+
+.qa-case-study .qa-card-content {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.qa-problem-impact {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.qa-stat-block {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.qa-stat-block:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.qa-stat-label {
+    margin: 0 0 6px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.qa-stat-value {
+    margin: 0;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.qa-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: auto;
+}
+
+.qa-capabilities {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #1f2937;
+    padding: 28px;
+    border-radius: 6px;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: all 0.2s ease;
+}
+
+.qa-capabilities:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.qa-capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    flex: 1;
+}
+
+.qa-capability {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 0;
+}
+
+.qa-capability:not(:last-child) {
+    border-right: 1px solid #f3f4f6;
+    padding-right: 28px;
+}
+
+.qa-capability-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.qa-capability .tech-item {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 12px;
+    display: inline-block;
+    transition: all 0.2s ease;
+    line-height: 1.4;
+}
+
+.tech-item {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-weight: 500;
+    font-size: 12px;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.tech-item:hover {
+    background-color: #e5e7eb;
+    border-color: #d1d5db;
+}
+
+.qa-cta-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #1f2937;
+    padding: 28px;
+    border-radius: 6px;
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    transition: all 0.2s ease;
+}
+
+.qa-cta-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.qa-cta-content {
+    flex: 1;
+}
+
+.qa-cta-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.qa-cta-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.qa-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1f2937;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border: 1px solid #1f2937;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.qa-cta-btn:hover {
+    background-color: #374151;
+    border-color: #374151;
+}
+
+.qa-cta-btn ion-icon {
+    font-size: 16px;
+}
+
+
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
   .projects-container {
     padding-left: 40px;
     padding-right: 40px;
+  }
+
+  .qa-capabilities-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .qa-capability:not(:last-child) {
+    padding-right: 24px;
   }
 }
 
@@ -509,6 +937,51 @@ onMounted(() => {
   .projects-container {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .qa-bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qa-capabilities {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .qa-capabilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .qa-capability:not(:last-child) {
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .qa-capability:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .qa-cta-card {
+    grid-column: 1 / -1;
+    flex-direction: column;
+    text-align: left;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .qa-cta-btn {
+    align-self: flex-start;
+  }
+
+  .qa-header h1 {
+    font-size: 22px;
+  }
+
+  .qa-header span {
+    font-size: 14px;
   }
 
   .bottom-section {
@@ -535,6 +1008,78 @@ onMounted(() => {
 
   .github-calendar {
     overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .qa-header h1 {
+    font-size: 20px;
+  }
+
+  .qa-card {
+    padding: 20px;
+  }
+
+  .qa-card-header {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .qa-card h3 {
+    font-size: 15px;
+  }
+
+  .qa-stat-label {
+    font-size: 11px;
+  }
+
+  .qa-stat-value {
+    font-size: 13px;
+  }
+
+  .tech-item {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .qa-capabilities {
+    padding: 20px;
+    gap: 18px;
+  }
+
+  .qa-capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .qa-capability:not(:last-child) {
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .qa-capability-label {
+    font-size: 10px;
+  }
+
+  .qa-cta-card {
+    padding: 20px;
+  }
+
+  .qa-cta-card h3 {
+    font-size: 16px;
+  }
+
+  .qa-cta-card p {
+    font-size: 13px;
+  }
+
+  .qa-cta-btn {
+    padding: 9px 16px;
+    font-size: 13px;
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>
