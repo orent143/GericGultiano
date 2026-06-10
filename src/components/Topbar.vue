@@ -40,14 +40,26 @@
                         <ion-icon name="download-outline" class="topbar-icons"></ion-icon>
                     </a>
                 </div>
+                <div class="cta-buttons">
+                    <router-link to="/hire-me" class="cta-btn hire-btn">
+                        <ion-icon name="briefcase-outline" class="btn-icon"></ion-icon>
+                        Hire Me
+                    </router-link>
+                    <button @click="toggleMessageBox" class="cta-btn message-btn">
+                        <ion-icon name="chatbox-outline" class="btn-icon"></ion-icon>
+                        Message Me
+                    </button>
+                </div>
             </div>
         </div>
+        <MessageChat :isOpen="showMessageBox" @close="showMessageBox = false"></MessageChat>
         <Navbar></Navbar>
-    </div>
+</div>
 </template>
 
 <script setup>
 import Navbar from "@/components/Navbar.vue";
+import MessageChat from "@/components/MessageChat.vue";
 import { onMounted, ref } from "vue";
 import { supabase } from "@/lib/supabase";
 import cvUrl from "@/assets/GericGultiano_Resume.pdf";
@@ -55,6 +67,11 @@ import profPic from "@/assets/pic1.png";
 
 const profile = ref(null);
 const socialLinks = ref([]);
+const showMessageBox = ref(false);
+
+const toggleMessageBox = () => {
+  showMessageBox.value = !showMessageBox.value;
+};
 
 const fetchProfile = async () => {
   const { data, error } = await supabase
@@ -195,8 +212,10 @@ onMounted(() => {
 
 .topbar-left {
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 40px 0;
+    gap: 5vh;
 }
 
 .additional-info {
@@ -301,6 +320,92 @@ onMounted(() => {
         width: 100%;
         justify-content: center;
         padding-top: 0;
+    }
+}
+
+/* CTA Buttons Styles */
+.cta-buttons {
+    display: flex;
+    gap: 12px;
+    margin-left: 30px;
+    align-items: center;
+}
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Archivo", Helvetica, Arial, sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.hire-btn {
+    background-color: #020617;
+    color: #ffffff;
+}
+
+.hire-btn:hover {
+    background-color: #111827;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 41, 55, 0.15);
+}
+
+.hire-btn:active {
+    transform: translateY(0);
+}
+
+.message-btn {
+    background-color: #f0f4f8;
+    color: #1f2937;
+    border: 1.5px solid #e0e7f1;
+}
+
+.message-btn:hover {
+    background-color: #e5ecf4;
+    border-color: #d0d9e8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.message-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1024px) {
+    .cta-buttons {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cta-buttons {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .cta-btn {
+        flex: 1;
+        max-width: 150px;
     }
 }
 </style>

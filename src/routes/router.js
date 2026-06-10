@@ -5,6 +5,7 @@ import Projects from "@/pages/Projects.vue";
 import AllProjects from "@/pages/AllProjects.vue"
 import Contact from "@/pages/Contacts.vue";
 import AllCerts from "@/pages/AllCerts.vue";
+import HireMe from "@/pages/HireMe.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -13,6 +14,7 @@ const routes = [
   { path: "/all-projects", component: AllProjects },
   { path: "/contact", component: Contact },
   { path: "/all-certs", component: AllCerts },
+  { path: "/hire-me", component: HireMe },
 ];
 
 const router = createRouter({

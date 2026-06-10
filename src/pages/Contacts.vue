@@ -153,12 +153,12 @@ const sendEmail = async () => {
 .first-content h1 {
     font-size: 40px;
     font-weight: bold;
-    color: #717171;
+    color: #020617;
 }
 
 .first-content span {
     font-size: 30px;
-    color: #999999a4;
+    color: #838383d8;
 }
 
 .second-content {
