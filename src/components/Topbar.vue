@@ -89,7 +89,7 @@ import Navbar from "@/components/Navbar.vue";
 import { onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { supabase } from "@/lib/supabase";
 import cvUrl from "@/assets/GericGultiano_Resume.pdf";
-import profPic from "@/assets/pic1.png";
+import profPic from "@/assets//New.jpg";
 
 const profile = ref(null);
 const socialLinks = ref([]);
